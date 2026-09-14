@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>animaflow — Brand Showcase & Concept Selector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090D16;
+      --card-bg: #0F172A;
+      --card-border: #1E293B;
+      --card-hover: #334155;
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+      --accent: #38BDF8;
+      --accent-2: #818CF8;
+      --accent-3: #F43F5E;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+      padding: 40px 24px;
+      line-height: 1.5;
+    }
+
+    header {
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .badge-pill {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #F8FAFC 0%, #94A3B8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .grid {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 28px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      border-color: var(--card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-tag {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      font-size: 0.75rem;
+      font-family: 'Fira Code', monospace;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: #1E293B;
+      color: var(--text-muted);
+    }
+
+    .preview-stage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 16px 0 20px;
+    }
+
+    .stage-box {
+      border-radius: 12px;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 160px;
+    }
+
+    .stage-box.dark {
+      background: #090D16;
+      border: 1px solid #1E293B;
+    }
+
+    .stage-box.light {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+    }
+
+    .stage-label {
+      position: absolute;
+      bottom: 6px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stage-box.dark .stage-label { color: #64748B; }
+    .stage-box.light .stage-label { color: #94A3B8; }
+
+    .horizontal-preview {
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .horizontal-preview.dark {
+      background: #090D16;
+      border: 1px solid #1E293B;
+    }
+
+    .horizontal-preview.light {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #F8FAFC;
+      margin-bottom: 6px;
+    }
+
+    .card-concept {
+      font-size: 0.9rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 16px;
+    }
+
+    .meta-list {
+      list-style: none;
+      font-size: 0.82rem;
+      color: #CBD5E1;
+      border-top: 1px solid #1E293B;
+      padding-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .meta-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .meta-list li::before {
+      content: "✦";
+      color: var(--accent);
+      font-size: 0.75rem;
+    }
+
+    /* Animações CSS interativas para simular pulso/flow */
+    @keyframes particle-stream {
+      0% { stroke-dashoffset: 200; }
+      100% { stroke-dashoffset: 0; }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.15); }
+    }
+
+    .flow-stream {
+      stroke-dasharray: 6 12;
+      animation: particle-stream 2s linear infinite;
+    }
+
+    .pulse-dot {
+      animation: pulse-glow 1.8s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    /* Estilos do rodapé */
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--card-border);
+      padding-top: 24px;
+    }
+
+    .action-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: #1E293B;
+      color: #F8FAFC;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="badge-pill">Identidade Visual — animaflow</div>
+    <h1>Galeria de Conceitos de Marca</h1>
+    <p class="subtitle">
+      Explore abaixo 5 propostas autorais pensadas especificamente para o <strong>animaflow</strong>. Cada conceito foi projetado com vetores matemáticos puros, testados em fundo claro e escuro, com proporções de ícone, favicon e assinatura completa.
+    </p>
+  </header>
+
+  <main class="grid">
+
+    <!-- ================= CONCEITO 1 ================= -->
+    <div class="card">
+      <div class="card-tag">CONCEITO 01</div>
+      <div class="card-title">Flux Loop (A Dinâmica)</div>
+      <div class="card-concept">Letra 'a' + Laço de Möbius + Partículas de Pipeline</div>
+      <p class="card-desc">
+        A letra <strong>'a'</strong> do animaflow estilizada como uma fita de fluxo contínuo. Nós técnicos conectam a órbita principal, onde partículas de dados transitam perpetuamente com pulso de alta velocidade.
+      </p>
+
+      <div class="preview-stage">
+        <!-- Dark -->
+        <div class="stage-box dark">
+          <svg width="90" height="90" viewBox="0 0 100 100">
+            <defs>
+              <linearGradient id="c1_g" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#38BDF8"/>
+                <stop offset="50%" stop-color="#6366F1"/>
+                <stop offset="100%" stop-color="#0284C7"/>
+              </linearGradient>
+            </defs>
+            <!-- Fita em forma de 'a' / loop -->
+            <path d="M 68 32 C 68 20, 42 18, 32 30 C 20 44, 20 62, 34 74 C 46 84, 68 80, 68 64 L 68 28 C 68 22, 74 18, 80 20" fill="none" stroke="url(#c1_g)" stroke-width="6.5" stroke-linecap="round"/>
+            <path d="M 32 46 C 45 44, 68 46, 68 62" fill="none" stroke="url(#c1_g)" stroke-width="6.0" stroke-linecap="round"/>
+            <!-- Nós e partículas -->
+            <circle cx="68" cy="32" r="5" fill="#38BDF8"/>
+            <circle cx="34" cy="74" r="5" fill="#818CF8"/>
+            <circle cx="68" cy="64" r="4" fill="#38BDF8"/>
+            <circle cx="48" cy="22" r="2.8" fill="#FFFFFF" class="pulse-dot"/>
+          </svg>
+          <span class="stage-label">Fundo Escuro</span>
+        </div>
+
+        <!-- Light -->
+        <div class="stage-box light">
+          <svg width="90" height="90" viewBox="0 0 100 100">
+            <path d="M 68 32 C 68 20, 42 18, 32 30 C 20 44, 20 62, 34 74 C 46 84, 68 80, 68 64 L 68 28 C 68 22, 74 18, 80 20" fill="none" stroke="#0F172A" stroke-width="6.5" stroke-linecap="round"/>
+            <path d="M 32 46 C 45 44, 68 46, 68 62" fill="none" stroke="#0F172A" stroke-width="6.0" stroke-linecap="round"/>
+            <circle cx="68" cy="32" r="5" fill="#0284C7"/>
+            <circle cx="34" cy="74" r="5" fill="#4F46E5"/>
+            <circle cx="68" cy="64" r="4" fill="#0284C7"/>
+            <circle cx="48" cy="22" r="2.8" fill="#0F172A"/>
+          </svg>
+          <span class="stage-label">Fundo Claro</span>
+        </div>
+      </div>
+
+      <!-- Assinatura Horizontal -->
+      <div class="horizontal-preview dark">
+        <svg width="240" height="42" viewBox="0 0 240 42">
+          <g transform="scale(0.42)">
+            <path d="M 68 32 C 68 20, 42 18, 32 30 C 20 44, 20 62, 34 74 C 46 84, 68 80, 68 64 L 68 28 C 68 22, 74 18, 80 20" fill="none" stroke="#38BDF8" stroke-width="8" stroke-linecap="round"/>
+            <path d="M 32 46 C 45 44, 68 46, 68 62" fill="none" stroke="#6366F1" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="68" cy="32" r="6" fill="#38BDF8"/>
+            <circle cx="34" cy="74" r="6" fill="#818CF8"/>
+          </g>
+          <text x="50" y="27" font-family="'IBM Plex Sans', sans-serif" font-size="20" font-weight="700" fill="#F8FAFC" letter-spacing="-0.5px">animaflow</text>
+        </svg>
+      </div>
+
+      <ul class="meta-list">
+        <li>Identificação instantânea com o "a" de animaflow</li>
+        <li>Movimento cinético contínuo (perfeito para animações/vídeo)</li>
+        <li>Excelente legibilidade em favicon (16px / 32px)</li>
+      </ul>
+    </div>
+
+
+    <!-- ================= CONCEITO 2 ================= -->
+    <div class="card">
+      <div class="card-tag">CONCEITO 02</div>
+      <div class="card-title">Quantum Mesh (A Rede Viva)</div>
+      <div class="card-concept">Nós de Microserviços + Pulso + Arestas Angulares</div>
+      <p class="card-desc">
+        Inspirado em <strong>DAGs de microsserviços e streaming de eventos</strong>. Nós ortogonais conectados por vetores diagonais dinâmicos com pacotes de dados viajando pelas rotas.
+      </p>
+
+      <div class="preview-stage">
+        <!-- Dark -->
+        <div class="stage-box dark">
+          <svg width="90" height="90" viewBox="0 0 100 100">
+            <defs>
+              <linearGradient id="c2_g1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#38BDF8"/>
+                <stop offset="100%" stop-color="#818CF8"/>
+              </linearGradient>
+            </defs>
+            <!-- Arestas de rede -->
+            <path d="M 22 50 L 50 22 L 78 50 L 50 78 Z" fill="none" stroke="#334155" stroke-width="3.5" stroke-linejoin="round"/>
+            <path d="M 22 50 L 78 50" fill="none" stroke="url(#c2_g1)" stroke-width="4.5" stroke-linecap="round"/>
+            <path d="M 50 22 L 50 78" fill="none" stroke="url(#c2_g1)" stroke-width="4.5" stroke-linecap="round"/>
+            <!-- Nós -->
+            <rect x="42" y="14" width="16" height="16" rx="4" fill="#38BDF8"/>
+            <rect x="70" y="42" width="16" height="16" rx="4" fill="#6366F1"/>
+            <rect x="42" y="70" width="16" height="16" rx="4" fill="#0284C7"/>
+            <rect x="14" y="42" width="16" height="16" rx="4" fill="#818CF8"/>
+            <!-- Partícula central de alta energia -->
+            <circle cx="50" cy="50" r="4.5" fill="#F8FAFC" class="pulse-dot"/>
+          </svg>
+          <span class="stage-label">Fundo Escuro</span>
+        </div>
+
+        <!-- Light -->
+        <div class="stage-box light">
+          <svg width="90" height="90" viewBox="0 0 100 100">
+            <path d="M 22 50 L 50 22 L 78 50 L 50 78 Z" fill="none" stroke="#CBD5E1" stroke-width="3.5" stroke-linejoin="round"/>
+            <path d="M 22 50 L 78 50" fill="none" stroke="#0F172A" stroke-width="4.5" stroke-linecap="round"/>
+            <path d="M 50 22 L 50 78" fill="none" stroke="#0F172A" stroke-width="4.5" stroke-linecap="round"/>
+            <rect x="42" y="14" width="16" height="16" rx="4" fill="#0284C7"/>
+            <rect x="70" y="42" width="16" height="16" rx="4" fill="#4F46E5"/>
+            <rect x="42" y="70" width="16" height="16" rx="4" fill="#0284C7"/>
+            <rect x="14" y="42" width="16" height="16" rx="4" fill="#4F46E5"/>
+            <circle cx="50" cy="50" r="4" fill="#0F172A"/>
+          </svg>
+          <span class="stage-label">Fundo Claro</span>
+        </div>
+      </div>
+
+      <div class="horizontal-preview dark">
+        <svg width="240" height="42" viewBox="0 0 240 42">
+          <g transform="scale(0.42)">
+            <path d="M 22 50 L 50 22 L 78 50 L 50 78 Z" fill="none" stroke="#334155" stroke-width="4"/>
+            <path d="M 22 50 L 78 50" fill="none" stroke="#38BDF8" stroke-width="5"/>
+            <rect x="42" y="14" width="16" height="16" rx="4" fill="#38BDF8"/>
+            <rect x="70" y="42" width="16" height="16" rx="4" fill="#6366F1"/>
+            <rect x="42" y="70" width="16" height="16" rx="4" fill="#0284C7"/>
+            <rect x="14" y="42" width="16" height="16" rx="4" fill="#818CF8"/>
+          </g>
+          <text x="50" y="27" font-family="'IBM Plex Sans', sans-serif" font-size="20" font-weight="700" fill="#F8FAFC" letter-spacing="-0.5px">animaflow</text>
+        </svg>
+      </div>
+
+      <ul class="meta-list">
+        <li>Visual puramente de engenharia de software e infraestrutura</li>
+        <li>Lembra diretamente blocos de arquitetura e topologia em grafo</li>
+        <li>Sensação de robustez corporativa e precisão técnica</li>
+      </ul>
+    </div>
+
+
+    <!-- ================= CONCEITO 3 ================= -->
+    <div class="card">
+      <div class="card-tag">CONCEITO 03</div>
+      <div class="card-title">Particle Stream (O Pulso Contínuo)</div>
+      <div class="card-concept">Curvas Bézier S-Flow + Partículas Gradientes</div>
+      <p class="card-desc">
+        Foco total na mecânica que torna a biblioteca única: <strong>linhas suaves de dados com esferas pulsando ao longo do percurso</strong>. Formas fluidas e dinâmicas que sugerem velocidade e elegância visual.
+      </p>
+
+      <div class="preview-stage">
+        <!-- Dark -->
+        <div class="stage-box dark">
+          <svg width="90" height="90" viewBox="0 0 100 100">
+            <defs>
+              <linearGradient id="c3_g" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#38BDF8"/>
+                <stop offset="50%" stop-color="#6366F1"/>
+                <stop offset="100%" stop-color="#F43F5E"/>
+              </linearGradient>
+            </defs>
+            <!-- 2 Curvas sinuosas de fluxo -->
+            <path d="M 18 30 C 45 30, 45 70, 82 70" fill="none" stroke="#1E293B" stroke-width="8" stroke-linecap="round"/>
+            <path d="M 18 70 C 45 70, 45 30, 82 30" fill="none" stroke="url(#c3_g)" stroke-width="7" stroke-linecap="round"/>
+            <!-- Partículas nos nós de entrada/saída -->
+            <circle cx="18" cy="70" r="6" fill="#38BDF8"/>
+            <circle cx="50" cy="50" r="5" fill="#818CF8" class="pulse-dot"/>
+            <circle cx="82" cy="30" r="6" fill="#F43F5E"/>
+            <circle cx="70" cy="36" r="3" fill="#FFFFFF"/>
+          </svg>
+          <span class="stage-label">Fundo Escuro</span>
+        </div>
+
+        <!-- Light -->
+        <div class="stage-box light">
+          <svg width="90" height="90" viewBox="0 0 100 100">
+            <path d="M 18 30 C 45 30, 45 70, 82 70" fill="none" stroke="#E2E8F0" stroke-width="8" stroke-linecap="round"/>
+            <path d="M 18 70 C 45 70, 45 30, 82 30" fill="none" stroke="#0F172A" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="18" cy="70" r="6" fill="#0284C7"/>
+            <circle cx="50" cy="50" r="5" fill="#4F46E5"/>
+            <circle cx="82" cy="30" r="6" fill="#E11D48"/>
+          </svg>
+          <span class="stage-label">Fundo Claro</span>
+        </div>
+      </div>
+
+      <div class="horizontal-preview dark">
+        <svg width="240" height="42" viewBox="0 0 240 42">
+          <g transform="scale(0.42)">
+            <path d="M 18 70 C 45 70, 45 30, 82 30" fill="none" stroke="#38BDF8" stroke-width="9" stroke-linecap="round"/>
+            <circle cx="18" cy="70" r="8" fill="#38BDF8"/>
+            <circle cx="50" cy="50" r="6" fill="#818CF8"/>
+            <circle cx="82" cy="30" r="8" fill="#F43F5E"/>
+          </g>
+          <text x="50" y="27" font-family="'IBM Plex Sans', sans-serif" font-size="20" font-weight="700" fill="#F8FAFC" letter-spacing="-0.5px">animaflow</text>
+        </svg>
+      </div>
+
+      <ul class="meta-list">
+        <li>Destaca a inovação das animações de stream contínuo</li>
+        <li>Gradiente tricolor contemporâneo (Sky -> Indigo -> Rose)</li>
+        <li>Aspecto de produto SaaS / DevTools de última geração</li>
+      </ul>
+    </div>
+
+
+    <!-- ================= CONCEITO 4 ================= -->
+    <div class="card">
+      <div class="card-tag">CONCEITO 04</div>
+      <div class="card-title">Circuit Arrow (A Narrativa Direcional)</div>
+      <div class="card-concept">Seta de Execução + Nó de Decisão + Playhead</div>
+      <p class="card-desc">
+        Representa a <strong>execução e o play</strong> de uma animação técnica. A forma combina o playhead de um reprodutor de vídeo com conectores lógicos de diagrama em camadas.
+      </p>
+
+      <div class="preview-stage">
+        <!-- Dark -->
+        <div class="stage-box dark">
+          <svg width="90" height="90" viewBox="0 0 100 100">
+            <defs>
+              <linearGradient id="c4_g" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#38BDF8"/>
+                <stop offset="100%" stop-color="#6366F1"/>
+              </linearGradient>
+            </defs>
+            <!-- Forma triangular / seta em circuito -->
+            <path d="M 28 22 L 76 50 L 28 78 Z" fill="none" stroke="#1E293B" stroke-width="7" stroke-linejoin="round"/>
+            <path d="M 28 22 L 76 50 L 28 78" fill="none" stroke="url(#c4_g)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- 3 nós nas pontas -->
+            <circle cx="28" cy="22" r="6.5" fill="#38BDF8"/>
+            <circle cx="76" cy="50" r="7.5" fill="#818CF8"/>
+            <circle cx="28" cy="78" r="6.5" fill="#0284C7"/>
+            <!-- Pulso interno -->
+            <circle cx="44" cy="50" r="4.5" fill="#F8FAFC" class="pulse-dot"/>
+          </svg>
+          <span class="stage-label">Fundo Escuro</span>
+        </div>
+
+        <!-- Light -->
+        <div class="stage-box light">
+          <svg width="90" height="90" viewBox="0 0 100 100">
+            <path d="M 28 22 L 76 50 L 28 78 Z" fill="none" stroke="#E2E8F0" stroke-width="7" stroke-linejoin="round"/>
+            <path d="M 28 22 L 76 50 L 28 78" fill="none" stroke="#0F172A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="28" cy="22" r="6.5" fill="#0284C7"/>
+            <circle cx="76" cy="50" r="7.5" fill="#4F46E5"/>
+            <circle cx="28" cy="78" r="6.5" fill="#0284C7"/>
+            <circle cx="44" cy="50" r="4.5" fill="#0F172A"/>
+          </svg>
+          <span class="stage-label">Fundo Claro</span>
+        </div>
+      </div>
+
+      <div class="horizontal-preview dark">
+        <svg width="240" height="42" viewBox="0 0 240 42">
+          <g transform="scale(0.42)">
+            <path d="M 28 22 L 76 50 L 28 78" fill="none" stroke="#38BDF8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="28" cy="22" r="7" fill="#38BDF8"/>
+            <circle cx="76" cy="50" r="8" fill="#818CF8"/>
+            <circle cx="28" cy="78" r="7" fill="#0284C7"/>
+          </g>
+          <text x="50" y="27" font-family="'IBM Plex Sans', sans-serif" font-size="20" font-weight="700" fill="#F8FAFC" letter-spacing="-0.5px">animaflow</text>
+        </svg>
+      </div>
+
+      <ul class="meta-list">
+        <li>Alusão imediata a "Play / Animação" e direção de dados</li>
+        <li>Silhueta marcante e de alta memorabilidade</li>
+        <li>Ícone extremamente sólido e geométrico</li>
+      </ul>
+    </div>
+
+
+    <!-- ================= CONCEITO 5 ================= -->
+    <div class="card">
+      <div class="card-tag">CONCEITO 05</div>
+      <div class="card-title">Layered Pipeline (Arquitetura em Camadas)</div>
+      <div class="card-concept">3 Camadas Verticais + Roteamento de Pacotes</div>
+      <p class="card-desc">
+        Referência literal ao <strong>auto_layout_layers</strong> e diagramas multicamada. Colunas verticais de nós interconectados por canais horizontais com bolhas transitando.
+      </p>
+
+      <div class="preview-stage">
+        <!-- Dark -->
+        <div class="stage-box dark">
+          <svg width="90" height="90" viewBox="0 0 100 100">
+            <defs>
+              <linearGradient id="c5_g" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#38BDF8"/>
+                <stop offset="100%" stop-color="#818CF8"/>
+              </linearGradient>
+            </defs>
+            <!-- 3 Linhas de barramento -->
+            <line x1="20" y1="32" x2="80" y2="32" stroke="#1E293B" stroke-width="4" stroke-linecap="round"/>
+            <line x1="20" y1="50" x2="80" y2="50" stroke="url(#c5_g)" stroke-width="4.5" stroke-linecap="round"/>
+            <line x1="20" y1="68" x2="80" y2="68" stroke="#1E293B" stroke-width="4" stroke-linecap="round"/>
+            <!-- Nós em colunas -->
+            <circle cx="20" cy="50" r="7" fill="#38BDF8"/>
+            <circle cx="50" cy="32" r="6" fill="#818CF8"/>
+            <circle cx="50" cy="68" r="6" fill="#818CF8"/>
+            <circle cx="80" cy="50" r="7" fill="#0284C7"/>
+            <!-- Conexões transversais -->
+            <line x1="20" y1="50" x2="50" y2="32" stroke="#38BDF8" stroke-width="3" stroke-linecap="round"/>
+            <line x1="20" y1="50" x2="50" y2="68" stroke="#38BDF8" stroke-width="3" stroke-linecap="round"/>
+            <line x1="50" y1="32" x2="80" y2="50" stroke="#818CF8" stroke-width="3" stroke-linecap="round"/>
+            <line x1="50" y1="68" x2="80" y2="50" stroke="#818CF8" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="50" cy="50" r="3.5" fill="#FFFFFF" class="pulse-dot"/>
+          </svg>
+          <span class="stage-label">Fundo Escuro</span>
+        </div>
+
+        <!-- Light -->
+        <div class="stage-box light">
+          <svg width="90" height="90" viewBox="0 0 100 100">
+            <line x1="20" y1="50" x2="80" y2="50" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round"/>
+            <line x1="20" y1="50" x2="50" y2="32" stroke="#0F172A" stroke-width="3" stroke-linecap="round"/>
+            <line x1="20" y1="50" x2="50" y2="68" stroke="#0F172A" stroke-width="3" stroke-linecap="round"/>
+            <line x1="50" y1="32" x2="80" y2="50" stroke="#0F172A" stroke-width="3" stroke-linecap="round"/>
+            <line x1="50" y1="68" x2="80" y2="50" stroke="#0F172A" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="20" cy="50" r="6.5" fill="#0284C7"/>
+            <circle cx="50" cy="32" r="5.5" fill="#4F46E5"/>
+            <circle cx="50" cy="68" r="5.5" fill="#4F46E5"/>
+            <circle cx="80" cy="50" r="6.5" fill="#0284C7"/>
+          </svg>
+          <span class="stage-label">Fundo Claro</span>
+        </div>
+      </div>
+
+      <div class="horizontal-preview dark">
+        <svg width="240" height="42" viewBox="0 0 240 42">
+          <g transform="scale(0.42)">
+            <line x1="20" y1="50" x2="50" y2="32" stroke="#38BDF8" stroke-width="4"/>
+            <line x1="20" y1="50" x2="50" y2="68" stroke="#38BDF8" stroke-width="4"/>
+            <line x1="50" y1="32" x2="80" y2="50" stroke="#818CF8" stroke-width="4"/>
+            <line x1="50" y1="68" x2="80" y2="50" stroke="#818CF8" stroke-width="4"/>
+            <circle cx="20" cy="50" r="7" fill="#38BDF8"/>
+            <circle cx="50" cy="32" r="6" fill="#818CF8"/>
+            <circle cx="50" cy="68" r="6" fill="#818CF8"/>
+            <circle cx="80" cy="50" r="7" fill="#0284C7"/>
+          </g>
+          <text x="50" y="27" font-family="'IBM Plex Sans', sans-serif" font-size="20" font-weight="700" fill="#F8FAFC" letter-spacing="-0.5px">animaflow</text>
+        </svg>
+      </div>
+
+      <ul class="meta-list">
+        <li>Ilustra com exatidão redes neurais, DAGs e pipelines</li>
+        <li>Transmite capacidade de orquestração e alta escala</li>
+        <li>Linhas retas e angulares elegantes</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>
+      Página de validação gerada para o repositório <strong>animaflow</strong>.
+    </p>
+    <div class="action-badge">
+      Escolha o conceito desejado (ex: Conceito 1, 3, etc.) para gerarmos o pacote completo de assets PNG/SVG e banners!
+    </div>
+  </footer>
+
+</body>
+</html>
+

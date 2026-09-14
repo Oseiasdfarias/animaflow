@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>animaflow — Paletas Minimalistas de Engenharia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #0E0F12;
+      color: #EDEDF0;
+      font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+      padding: 48px 24px;
+      line-height: 1.5;
+    }
+    header {
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      padding: 5px 12px;
+      background: #1C1D22;
+      border: 1px solid #2B2C33;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #A1A1AA;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+      color: #FAFAFA;
+    }
+    p.subtitle {
+      color: #888892;
+      font-size: 1.05rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(540px, 1fr));
+      gap: 32px;
+    }
+    .card {
+      background: #15161A;
+      border: 1px solid #23242B;
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-header {
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #FAFAFA;
+    }
+    .card-sub {
+      font-size: 0.88rem;
+      color: #8E8E98;
+      margin-top: 4px;
+    }
+    .stages {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .stage {
+      border-radius: 8px;
+      padding: 24px 16px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .stage-badge {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-top: 14px;
+    }
+    .card-desc {
+      font-size: 0.85rem;
+      color: #A1A1AA;
+      border-top: 1px solid #23242B;
+      padding-top: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="badge">Design de Precisão &amp; Identidade Visual</div>
+    <h1>Paletas Minimalistas para o animaflow</h1>
+    <p class="subtitle">
+      Afastando-se dos gradientes saturados comuns de IA, estas 4 opções foram concebidas com princípios de <strong>design suíço, Dieter Rams e estética técnica atemporal</strong>.
+    </p>
+  </header>
+
+  <main class="grid">
+
+    <!-- PALETA 1 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">1. Wabi Ink &amp; Vermilion (Braun / Dieter Rams)</div>
+        <div class="card-sub">Grafite industrial escuro (#18181B) + Papel (#F4F4F5) + Acento pontual Vermilion (#FF4422)</div>
+      </div>
+      <div class="stages">
+        <div class="stage" style="background:#18181B; border:1px solid #27272A;">
+          <svg width="65" height="65" viewBox="0 0 120 120">
+            <path d="M 36 42 C 48 24, 72 24, 84 42 C 96 60, 80 84, 60 88 C 40 92, 24 60, 36 42 Z" fill="none" stroke="#D4D4D8" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="36" cy="42" r="10.5" fill="#F4F4F5"/>
+            <circle cx="36" cy="42" r="4.5" fill="#18181B"/>
+            <circle cx="84" cy="42" r="10.5" fill="#FF4422"/>
+            <circle cx="84" cy="42" r="4.5" fill="#18181B"/>
+            <circle cx="60" cy="88" r="9.5" fill="#F4F4F5"/>
+            <circle cx="60" cy="88" r="4.0" fill="#18181B"/>
+            <circle cx="60" cy="29.5" r="3.8" fill="#FF4422"/>
+            <circle cx="78" cy="74" r="3.4" fill="#FF4422"/>
+            <circle cx="37" cy="68" r="3.0" fill="#FF4422"/>
+          </svg>
+          <span style="font-family:'IBM Plex Sans',sans-serif; font-size:1.15rem; font-weight:700; color:#FAFAFA; margin-top:8px;">animaflow</span>
+          <span class="stage-badge" style="color:#71717A;">Dark (Terminal)</span>
+        </div>
+
+        <div class="stage" style="background:#F4F4F5; border:1px solid #E4E4E7;">
+          <svg width="65" height="65" viewBox="0 0 120 120">
+            <path d="M 36 42 C 48 24, 72 24, 84 42 C 96 60, 80 84, 60 88 C 40 92, 24 60, 36 42 Z" fill="none" stroke="#18181B" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="36" cy="42" r="10.5" fill="#18181B"/>
+            <circle cx="36" cy="42" r="4.5" fill="#F4F4F5"/>
+            <circle cx="84" cy="42" r="10.5" fill="#E11D48"/>
+            <circle cx="84" cy="42" r="4.5" fill="#F4F4F5"/>
+            <circle cx="60" cy="88" r="9.5" fill="#18181B"/>
+            <circle cx="60" cy="88" r="4.0" fill="#F4F4F5"/>
+            <circle cx="60" cy="29.5" r="3.8" fill="#E11D48"/>
+            <circle cx="78" cy="74" r="3.4" fill="#E11D48"/>
+            <circle cx="37" cy="68" r="3.0" fill="#E11D48"/>
+          </svg>
+          <span style="font-family:'IBM Plex Sans',sans-serif; font-size:1.15rem; font-weight:700; color:#18181B; margin-top:8px;">animaflow</span>
+          <span class="stage-badge" style="color:#A1A1AA;">Light (Papel)</span>
+        </div>
+      </div>
+      <div class="card-desc">
+        ✦ <strong>Destaque</strong>: O acento vermelho quente (Vermilion) atua exatamente como a luz-piloto dos aparelhos de áudio clássicos da Braun. Contraste editorial forte, atemporal e sóbrio.
+      </div>
+    </div>
+
+    <!-- PALETA 2 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">2. Swiss Monolith (Preto e Branco Puro)</div>
+        <div class="card-sub">Preto absoluto (#0D0D0D) + Branco osso (#FAFAFA) + Escala cinza neutra (Design Suíço)</div>
+      </div>
+      <div class="stages">
+        <div class="stage" style="background:#0D0D0D; border:1px solid #262626;">
+          <svg width="65" height="65" viewBox="0 0 120 120">
+            <path d="M 36 42 C 48 24, 72 24, 84 42 C 96 60, 80 84, 60 88 C 40 92, 24 60, 36 42 Z" fill="none" stroke="#737373" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="36" cy="42" r="10.5" fill="#FAFAFA"/>
+            <circle cx="36" cy="42" r="4.5" fill="#0D0D0D"/>
+            <circle cx="84" cy="42" r="10.5" fill="#FAFAFA"/>
+            <circle cx="84" cy="42" r="4.5" fill="#0D0D0D"/>
+            <circle cx="60" cy="88" r="9.5" fill="#FAFAFA"/>
+            <circle cx="60" cy="88" r="4.0" fill="#0D0D0D"/>
+            <circle cx="60" cy="29.5" r="3.8" fill="#FAFAFA"/>
+            <circle cx="78" cy="74" r="3.4" fill="#FAFAFA"/>
+            <circle cx="37" cy="68" r="3.0" fill="#FAFAFA"/>
+          </svg>
+          <span style="font-family:'IBM Plex Sans',sans-serif; font-size:1.15rem; font-weight:700; color:#FAFAFA; margin-top:8px;">animaflow</span>
+          <span class="stage-badge" style="color:#525252;">Dark (Minimal)</span>
+        </div>
+
+        <div class="stage" style="background:#FAFAFA; border:1px solid #E5E5E5;">
+          <svg width="65" height="65" viewBox="0 0 120 120">
+            <path d="M 36 42 C 48 24, 72 24, 84 42 C 96 60, 80 84, 60 88 C 40 92, 24 60, 36 42 Z" fill="none" stroke="#737373" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="36" cy="42" r="10.5" fill="#171717"/>
+            <circle cx="36" cy="42" r="4.5" fill="#FAFAFA"/>
+            <circle cx="84" cy="42" r="10.5" fill="#171717"/>
+            <circle cx="84" cy="42" r="4.5" fill="#FAFAFA"/>
+            <circle cx="60" cy="88" r="9.5" fill="#171717"/>
+            <circle cx="60" cy="88" r="4.0" fill="#FAFAFA"/>
+            <circle cx="60" cy="29.5" r="3.8" fill="#171717"/>
+            <circle cx="78" cy="74" r="3.4" fill="#171717"/>
+            <circle cx="37" cy="68" r="3.0" fill="#171717"/>
+          </svg>
+          <span style="font-family:'IBM Plex Sans',sans-serif; font-size:1.15rem; font-weight:700; color:#171717; margin-top:8px;">animaflow</span>
+          <span class="stage-badge" style="color:#737373;">Light (Monolith)</span>
+        </div>
+      </div>
+      <div class="card-desc">
+        ✦ <strong>Destaque</strong>: Rigor geométrico puro sem qualquer cor supérflua. Focado inteiramente na forma, peso e precisão de linhas da escola internacional de tipografia.
+      </div>
+    </div>
+
+    <!-- PALETA 3 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">3. Nordic Sage &amp; Carbon (Design Nórdico)</div>
+        <div class="card-sub">Carvão mineral (#121619) + Sage orgânico (#9EC8B9) + Jade técnico (#5C9E89)</div>
+      </div>
+      <div class="stages">
+        <div class="stage" style="background:#121619; border:1px solid #1F262B;">
+          <svg width="65" height="65" viewBox="0 0 120 120">
+            <path d="M 36 42 C 48 24, 72 24, 84 42 C 96 60, 80 84, 60 88 C 40 92, 24 60, 36 42 Z" fill="none" stroke="#5C9E89" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="36" cy="42" r="10.5" fill="#9EC8B9"/>
+            <circle cx="36" cy="42" r="4.5" fill="#121619"/>
+            <circle cx="84" cy="42" r="10.5" fill="#D7EBE3"/>
+            <circle cx="84" cy="42" r="4.5" fill="#121619"/>
+            <circle cx="60" cy="88" r="9.5" fill="#5C9E89"/>
+            <circle cx="60" cy="88" r="4.0" fill="#121619"/>
+            <circle cx="60" cy="29.5" r="3.8" fill="#D7EBE3"/>
+            <circle cx="78" cy="74" r="3.4" fill="#9EC8B9"/>
+            <circle cx="37" cy="68" r="3.0" fill="#5C9E89"/>
+          </svg>
+          <span style="font-family:'IBM Plex Sans',sans-serif; font-size:1.15rem; font-weight:700; color:#EBF4F0; margin-top:8px;">animaflow</span>
+          <span class="stage-badge" style="color:#5C9E89;">Dark (Carbon)</span>
+        </div>
+
+        <div class="stage" style="background:#F2F6F4; border:1px solid #D5E2DC;">
+          <svg width="65" height="65" viewBox="0 0 120 120">
+            <path d="M 36 42 C 48 24, 72 24, 84 42 C 96 60, 80 84, 60 88 C 40 92, 24 60, 36 42 Z" fill="none" stroke="#37594E" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="36" cy="42" r="10.5" fill="#29443B"/>
+            <circle cx="36" cy="42" r="4.5" fill="#F2F6F4"/>
+            <circle cx="84" cy="42" r="10.5" fill="#4B7769"/>
+            <circle cx="84" cy="42" r="4.5" fill="#F2F6F4"/>
+            <circle cx="60" cy="88" r="9.5" fill="#29443B"/>
+            <circle cx="60" cy="88" r="4.0" fill="#F2F6F4"/>
+            <circle cx="60" cy="29.5" r="3.8" fill="#4B7769"/>
+            <circle cx="78" cy="74" r="3.4" fill="#4B7769"/>
+            <circle cx="37" cy="68" r="3.0" fill="#37594E"/>
+          </svg>
+          <span style="font-family:'IBM Plex Sans',sans-serif; font-size:1.15rem; font-weight:700; color:#162420; margin-top:8px;">animaflow</span>
+          <span class="stage-badge" style="color:#6A8B7E;">Light (Sage)</span>
+        </div>
+      </div>
+      <div class="card-desc">
+        ✦ <strong>Destaque</strong>: Tons orgânicos suaves de sálvia mineral e carvão. Sensação de tranquilidade técnica, muito adotado em estúdios de arquitetura escandinavos.
+      </div>
+    </div>
+
+    <!-- PALETA 4 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">4. Amber Phosphor (CRT &amp; Hardware)</div>
+        <div class="card-sub">Obsidiana fosca (#111215) + Âmbar quente (#E5A93C) + Dourado de cobre (#F4C46A)</div>
+      </div>
+      <div class="stages">
+        <div class="stage" style="background:#111215; border:1px solid #22242B;">
+          <svg width="65" height="65" viewBox="0 0 120 120">
+            <path d="M 36 42 C 48 24, 72 24, 84 42 C 96 60, 80 84, 60 88 C 40 92, 24 60, 36 42 Z" fill="none" stroke="#8C6A30" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="36" cy="42" r="10.5" fill="#E5A93C"/>
+            <circle cx="36" cy="42" r="4.5" fill="#111215"/>
+            <circle cx="84" cy="42" r="10.5" fill="#F4C46A"/>
+            <circle cx="84" cy="42" r="4.5" fill="#111215"/>
+            <circle cx="60" cy="88" r="9.5" fill="#E5A93C"/>
+            <circle cx="60" cy="88" r="4.0" fill="#111215"/>
+            <circle cx="60" cy="29.5" r="3.8" fill="#F4C46A"/>
+            <circle cx="78" cy="74" r="3.4" fill="#F4C46A"/>
+            <circle cx="37" cy="68" r="3.0" fill="#E5A93C"/>
+          </svg>
+          <span style="font-family:'IBM Plex Sans',sans-serif; font-size:1.15rem; font-weight:700; color:#FAF7F0; margin-top:8px;">animaflow</span>
+          <span class="stage-badge" style="color:#D99B26;">Dark (Phosphor)</span>
+        </div>
+
+        <div class="stage" style="background:#FAF8F5; border:1px solid #EADBCC;">
+          <svg width="65" height="65" viewBox="0 0 120 120">
+            <path d="M 36 42 C 48 24, 72 24, 84 42 C 96 60, 80 84, 60 88 C 40 92, 24 60, 36 42 Z" fill="none" stroke="#664619" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="36" cy="42" r="10.5" fill="#3D290E"/>
+            <circle cx="36" cy="42" r="4.5" fill="#FAF8F5"/>
+            <circle cx="84" cy="42" r="10.5" fill="#B37822"/>
+            <circle cx="84" cy="42" r="4.5" fill="#FAF8F5"/>
+            <circle cx="60" cy="88" r="9.5" fill="#3D290E"/>
+            <circle cx="60" cy="88" r="4.0" fill="#FAF8F5"/>
+            <circle cx="60" cy="29.5" r="3.8" fill="#B37822"/>
+            <circle cx="78" cy="74" r="3.4" fill="#B37822"/>
+            <circle cx="37" cy="68" r="3.0" fill="#664619"/>
+          </svg>
+          <span style="font-family:'IBM Plex Sans',sans-serif; font-size:1.15rem; font-weight:700; color:#2E200C; margin-top:8px;">animaflow</span>
+          <span class="stage-badge" style="color:#8C6A30;">Light (Amber)</span>
+        </div>
+      </div>
+      <div class="card-desc">
+        ✦ <strong>Destaque</strong>: Evoca os monitores de fósforo âmbar clássicos e osciloscópios de hardware. Extremamente quente, elegante e diferenciado de tudo no mercado.
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>
+

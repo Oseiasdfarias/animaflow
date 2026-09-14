@@ -48,8 +48,9 @@ _media/
 output/
 dist_web/
 
-# Allow docs assets
+# Allow docs assets & brand identity
 !docs/assets/**
+!brand/**
 
 
 # IDEs

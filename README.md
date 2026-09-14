@@ -1,6 +1,8 @@
 <p align="center">
-  <img height="100" src="https://raw.githubusercontent.com/Oseiasdfarias/animaflow/main/docs/assets/animaflow_logo.png" alt="animaflow logo" onerror="this.style.display='none'"/>
-  <h1 align="center">animaflow (animaflow.io)</h1>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./brand/png/logo-horizontal-800.png">
+    <img height="110" src="./brand/png/logo-horizontal-solido-800.png" alt="animaflow">
+  </picture>
 </p>
 
 <p align="center">
