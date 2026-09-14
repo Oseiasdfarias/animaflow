@@ -52,12 +52,8 @@ RGB_LIGHT_INK = (0.086, 0.141, 0.125)
 RGB_LIGHT_STROKE = (0.216, 0.349, 0.306)
 RGB_LIGHT_ACCENT = (0.294, 0.467, 0.412)
 
-LOOP_PATH_D = (
-    "M 36 42 "
-    "C 48 24, 72 24, 84 42 "
-    "C 96 60, 80 84, 60 88 "
-    "C 40 92, 24 60, 36 42 Z"
-)
+LOOP_PATH_D = "M 36 42 C 48 24, 72 24, 84 42 C 96 60, 80 84, 60 88 C 40 92, 24 60, 36 42 Z"
+
 
 def get_symbol_svg(mode="dark"):
     """
@@ -99,18 +95,25 @@ def get_symbol_svg(mode="dark"):
     <circle cx="60" cy="88" r="4.0" fill="{core}"/>
   </g>"""
 
+
 def generate_svgs():
     print("-> Gerando arquivos SVG (Nordic Sage & Carbon)...")
 
     # 1. Ícones
     with open(os.path.join(SVG_DIR, "icone.svg"), "w") as f:
-        f.write(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">\n  {get_symbol_svg("dark")}\n</svg>')
+        f.write(
+            f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">\n  {get_symbol_svg("dark")}\n</svg>'
+        )
 
     with open(os.path.join(SVG_DIR, "icone-solido.svg"), "w") as f:
-        f.write(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">\n  {get_symbol_svg("light")}\n</svg>')
+        f.write(
+            f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">\n  {get_symbol_svg("light")}\n</svg>'
+        )
 
     with open(os.path.join(SVG_DIR, "icone-mono.svg"), "w") as f:
-        f.write(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">\n  {get_symbol_svg("mono")}\n</svg>')
+        f.write(
+            f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">\n  {get_symbol_svg("mono")}\n</svg>'
+        )
 
     # 2. Favicon
     fav_dark = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
@@ -221,7 +224,7 @@ def generate_svgs():
   </g>
 
   <!-- Tipografia: animaflow -->
-  <g transform="translate({(1280 - text_w * 2.0)/2.0:.1f}, 390) scale(2.0)" fill="{HEX_SAGE_ICE}">
+  <g transform="translate({(1280 - text_w * 2.0) / 2.0:.1f}, 390) scale(2.0)" fill="{HEX_SAGE_ICE}">
     <path d="{d_text}" />
   </g>
 
@@ -244,6 +247,7 @@ def generate_svgs():
 </svg>""")
 
     print("✓ Todos os SVGs foram gerados!")
+
 
 def draw_cairo_symbol(ctx, mode="dark", scale=1.0):
     ctx.save()
@@ -276,7 +280,7 @@ def draw_cairo_symbol(ctx, mode="dark", scale=1.0):
     # Partículas
     for px, py, pr in [(60, 29.5, 3.8), (78, 74, 3.4), (37, 68, 3.0)]:
         ctx.new_path()
-        ctx.arc(px, py, pr, 0, 2*math.pi)
+        ctx.arc(px, py, pr, 0, 2 * math.pi)
         ctx.set_source_rgb(*col_part)
         ctx.fill()
 
@@ -284,15 +288,16 @@ def draw_cairo_symbol(ctx, mode="dark", scale=1.0):
     nodes = [(36, 42, 10.5, 4.5), (84, 42, 10.5, 4.5), (60, 88, 9.5, 4.0)]
     for i, (nx, ny, ro, ri) in enumerate(nodes):
         ctx.new_path()
-        ctx.arc(nx, ny, ro, 0, 2*math.pi)
+        ctx.arc(nx, ny, ro, 0, 2 * math.pi)
         ctx.set_source_rgb(*col_nodes[i])
         ctx.fill()
         ctx.new_path()
-        ctx.arc(nx, ny, ri, 0, 2*math.pi)
+        ctx.arc(nx, ny, ri, 0, 2 * math.pi)
         ctx.set_source_rgb(*col_core)
         ctx.fill()
 
     ctx.restore()
+
 
 def draw_cairo_text(ctx, text, x, y, size, color_rgb):
     font = TTFont(FONT_PATH)
@@ -320,6 +325,7 @@ def draw_cairo_text(ctx, text, x, y, size, color_rgb):
         cur_x += hmtx[gname][0] * scale
     ctx.restore()
 
+
 def rasterize_all_cairo():
     print("-> Rasterizando PNGs nórdicos de alta resolução com PyCairo...")
 
@@ -327,7 +333,7 @@ def rasterize_all_cairo():
     for px in [1024, 512, 256, 128, 64]:
         surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, px, px)
         ctx = cairo.Context(surface)
-        draw_cairo_symbol(ctx, "dark", scale=px/120.0)
+        draw_cairo_symbol(ctx, "dark", scale=px / 120.0)
         surface.write_to_png(os.path.join(PNG_DIR, f"icone-{px}.png"))
         print(f"  ✓ icone-{px}.png")
 
@@ -335,7 +341,7 @@ def rasterize_all_cairo():
     for name, mode in [("icone-solido-512.png", "light"), ("icone-solido-branco-512.png", "dark")]:
         surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, 512, 512)
         ctx = cairo.Context(surface)
-        draw_cairo_symbol(ctx, mode, scale=512/120.0)
+        draw_cairo_symbol(ctx, mode, scale=512 / 120.0)
         surface.write_to_png(os.path.join(PNG_DIR, name))
         print(f"  ✓ {name}")
 
@@ -345,10 +351,10 @@ def rasterize_all_cairo():
         ctx = cairo.Context(surface)
         r = fsize * 0.22
         ctx.new_sub_path()
-        ctx.arc(fsize - r, r, r, -math.pi/2, 0)
-        ctx.arc(fsize - r, fsize - r, r, 0, math.pi/2)
-        ctx.arc(r, fsize - r, r, math.pi/2, math.pi)
-        ctx.arc(r, r, r, math.pi, 3*math.pi/2)
+        ctx.arc(fsize - r, r, r, -math.pi / 2, 0)
+        ctx.arc(fsize - r, fsize - r, r, 0, math.pi / 2)
+        ctx.arc(r, fsize - r, r, math.pi / 2, math.pi)
+        ctx.arc(r, r, r, math.pi, 3 * math.pi / 2)
         ctx.close_path()
         ctx.set_source_rgb(*RGB_DARK_BG)
         ctx.fill()
@@ -366,10 +372,18 @@ def rasterize_all_cairo():
         ctx.set_source_rgb(*RGB_JADE)
         ctx.stroke()
 
-        ctx.arc(10, 11, 3.2, 0, 2*math.pi); ctx.set_source_rgb(*RGB_SAGE_LIGHT); ctx.fill()
-        ctx.arc(22, 11, 3.2, 0, 2*math.pi); ctx.set_source_rgb(*RGB_SAGE_ICE); ctx.fill()
-        ctx.arc(16, 23, 2.8, 0, 2*math.pi); ctx.set_source_rgb(*RGB_JADE); ctx.fill()
-        ctx.arc(16, 7.8, 1.3, 0, 2*math.pi); ctx.set_source_rgb(*RGB_SAGE_ICE); ctx.fill()
+        ctx.arc(10, 11, 3.2, 0, 2 * math.pi)
+        ctx.set_source_rgb(*RGB_SAGE_LIGHT)
+        ctx.fill()
+        ctx.arc(22, 11, 3.2, 0, 2 * math.pi)
+        ctx.set_source_rgb(*RGB_SAGE_ICE)
+        ctx.fill()
+        ctx.arc(16, 23, 2.8, 0, 2 * math.pi)
+        ctx.set_source_rgb(*RGB_JADE)
+        ctx.fill()
+        ctx.arc(16, 7.8, 1.3, 0, 2 * math.pi)
+        ctx.set_source_rgb(*RGB_SAGE_ICE)
+        ctx.fill()
         ctx.restore()
 
         surface.write_to_png(os.path.join(PNG_DIR, f"favicon-{fsize}.png"))
@@ -442,7 +456,7 @@ def rasterize_all_cairo():
     # 5. Banner Hero (1280x640)
     surface_b = cairo.ImageSurface(cairo.FORMAT_ARGB32, 1280, 640)
     ctx_b = cairo.Context(surface_b)
-    
+
     # Fundo Sólido Nórdico Carvão
     ctx_b.set_source_rgb(*RGB_DARK_BG)
     ctx_b.rectangle(0, 0, 1280, 640)
@@ -452,9 +466,13 @@ def rasterize_all_cairo():
     ctx_b.set_source_rgba(RGB_SAGE_LIGHT[0], RGB_SAGE_LIGHT[1], RGB_SAGE_LIGHT[2], 0.05)
     ctx_b.set_line_width(1.0)
     for y in range(80, 640, 80):
-        ctx_b.move_to(0, y); ctx_b.line_to(1280, y); ctx_b.stroke()
+        ctx_b.move_to(0, y)
+        ctx_b.line_to(1280, y)
+        ctx_b.stroke()
     for x in range(160, 1280, 160):
-        ctx_b.move_to(x, 0); ctx_b.line_to(x, 640); ctx_b.stroke()
+        ctx_b.move_to(x, 0)
+        ctx_b.line_to(x, 640)
+        ctx_b.stroke()
 
     # Símbolo no banner
     ctx_b.save()
@@ -490,10 +508,10 @@ def rasterize_all_cairo():
         bw, bh = 135, 34
         r = 6
         ctx_b.new_sub_path()
-        ctx_b.arc(bx + bw - r, by + r, r, -math.pi/2, 0)
-        ctx_b.arc(bx + bw - r, by + bh - r, r, 0, math.pi/2)
-        ctx_b.arc(bx + r, by + bh - r, r, math.pi/2, math.pi)
-        ctx_b.arc(bx + r, by + r, r, math.pi, 3*math.pi/2)
+        ctx_b.arc(bx + bw - r, by + r, r, -math.pi / 2, 0)
+        ctx_b.arc(bx + bw - r, by + bh - r, r, 0, math.pi / 2)
+        ctx_b.arc(bx + r, by + bh - r, r, math.pi / 2, math.pi)
+        ctx_b.arc(bx + r, by + r, r, math.pi, 3 * math.pi / 2)
         ctx_b.close_path()
         ctx_b.set_source_rgb(*RGB_DARK_SURFACE)
         ctx_b.fill_preserve()
@@ -505,11 +523,12 @@ def rasterize_all_cairo():
         ctx_b.set_font_size(13.0)
         ctx_b.set_source_rgb(*b_col)
         b_ext = ctx_b.text_extents(b_title)
-        ctx_b.move_to(bx + (bw - b_ext.width)/2.0, by + 22)
+        ctx_b.move_to(bx + (bw - b_ext.width) / 2.0, by + 22)
         ctx_b.show_text(b_title)
 
     surface_b.write_to_png(os.path.join(PNG_DIR, "banner-hero-1280.png"))
     print("  ✓ banner-hero-1280.png")
+
 
 if __name__ == "__main__":
     generate_svgs()
