@@ -16,16 +16,16 @@ class RAGFlowAnimation(Scene):
         # 1. Declare flow
         flow = af.Flow(title="LLM RAG Architecture", theme=af.DarkTerminal)
 
-        client = flow.add_node("Client", subtitle="Chat UI", width=1.45, height=1.3)
-        gateway = flow.add_node("Gateway", subtitle="FastAPI", width=1.45, height=1.3)
-        vdb = flow.add_node("Vector DB", subtitle="Qdrant", width=1.45, height=1.3)
-        llm = flow.add_node("LLM Engine", subtitle="Claude 3.5", width=1.45, height=1.3)
+        client = flow.add_node("Client", subtitle="Chat UI")
+        gateway = flow.add_node("Gateway", subtitle="FastAPI")
+        vdb = flow.add_node("Vector DB", subtitle="Qdrant")
+        llm = flow.add_node("LLM Engine", subtitle="Claude 3.5")
 
         flow.connect(client, gateway, label="prompt")
         flow.connect(gateway, vdb, label="search")
         flow.connect(gateway, llm, label="context")
 
-        flow.auto_layout(mode="horizontal", spacing=1.85)
+        flow.auto_layout(mode="horizontal", spacing=2.15)
 
         # 2. Add narrative actions
         flow.timeline.reveal_sequence(delay_per_item=0.3)

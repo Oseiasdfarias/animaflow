@@ -12,25 +12,53 @@ class ManimFlowRenderer:
         self.node_mobjects: Dict[str, Any] = {}
         self.edge_mobjects: Dict[str, Any] = {}
 
+    def prepare_and_measure_nodes(self) -> None:
+        """Measures exact text bounds and adjusts node widths and layout before rendering."""
+        from manim import Text, VGroup, DOWN
+
+        t = self.flow.theme
+
+        # 1. Calibrate each node width and height based on actual text
+        for node in self.flow.nodes.values():
+            items = []
+            title_txt = Text(
+                node.title,
+                font="IBM Plex Mono",
+                font_size=14,
+                color=t.text_color,
+                weight="BOLD",
+            )
+            items.append(title_txt)
+
+            if node.subtitle:
+                sub_txt = Text(
+                    node.subtitle,
+                    font="IBM Plex Mono",
+                    font_size=11,
+                    color=t.text_muted,
+                )
+                items.append(sub_txt)
+
+            content = VGroup(*items).arrange(DOWN, buff=0.10)
+
+            padding_h = max(node.padding, 0.45)
+            padding_v = max(node.padding * 0.7, 0.35)
+            node.width = max(node.min_width, content.width + padding_h * 2)
+            node.height = max(node.min_height, content.height + padding_v * 2)
+
+        # 2. Re-run layout to guarantee clear border-to-border gap with true widths
+        self.flow.auto_layout(mode="horizontal", gap=0.80)
+
     def build_node_mobject(self, node: Node) -> Any:
         from manim import RoundedRectangle, Text, VGroup, DOWN
 
         t = self.flow.theme
-        rect = RoundedRectangle(
-            corner_radius=t.node_corner_radius,
-            width=node.width,
-            height=node.height,
-            color=t.border_color,
-            stroke_width=2.5,
-            fill_color=t.surface_color,
-            fill_opacity=1.0,
-        ).move_to(node.position)
 
         items = []
         title_txt = Text(
             node.title,
             font="IBM Plex Mono",
-            font_size=15,
+            font_size=14,
             color=t.text_color,
             weight="BOLD",
         )
@@ -45,14 +73,27 @@ class ManimFlowRenderer:
             )
             items.append(sub_txt)
 
-        content = VGroup(*items).arrange(DOWN, buff=0.10).move_to(rect.get_center())
+        content = VGroup(*items).arrange(DOWN, buff=0.10)
+
+        rect = RoundedRectangle(
+            corner_radius=t.node_corner_radius,
+            width=node.width,
+            height=node.height,
+            color=t.border_color,
+            stroke_width=2.5,
+            fill_color=t.surface_color,
+            fill_opacity=1.0,
+        ).move_to(node.position)
+
+        content.move_to(rect.get_center())
+
         node_group = VGroup(rect, content)
         node_group.rect = rect
         node_group.content = content
         return node_group
 
     def build_edge_mobject(self, edge: Edge) -> Any:
-        from manim import Arrow, CurvedArrow, Text, VGroup, UP, DOWN
+        from manim import Arrow, CurvedArrow, Text, VGroup, UP, RoundedRectangle
 
         t = self.flow.theme
         src_mob = self.node_mobjects.get(edge.source_id)
@@ -61,14 +102,13 @@ class ManimFlowRenderer:
         if not src_mob or not tgt_mob:
             return None
 
-        # Detect if target is immediately adjacent or jumping over a node
         src_pos = src_mob.rect.get_center()
         tgt_pos = tgt_mob.rect.get_center()
         dx = tgt_pos[0] - src_pos[0]
         dy = tgt_pos[1] - src_pos[1]
 
-        # Standard direct arrow if adjacent
-        if abs(dy) < 0.1 and abs(dx) < 2.5:
+        # Adjacent direct connection
+        if abs(dy) < 0.1 and abs(dx) < 3.2:
             arrow = Arrow(
                 src_mob.rect.get_right(),
                 tgt_mob.rect.get_left(),
@@ -78,40 +118,66 @@ class ManimFlowRenderer:
                 color=t.border_color,
             )
             if edge.label:
-                lbl = Text(
+                lbl_txt = Text(
                     edge.label,
                     font="IBM Plex Mono",
                     font_size=10,
                     color=t.text_muted,
-                ).next_to(arrow, UP, buff=0.08)
-                group = VGroup(arrow, lbl)
+                )
+                pill = RoundedRectangle(
+                    corner_radius=0.06,
+                    width=lbl_txt.width + 0.16,
+                    height=lbl_txt.height + 0.10,
+                    fill_color=t.bg_color,
+                    fill_opacity=0.95,
+                    stroke_color=t.border_color,
+                    stroke_width=1.0,
+                ).next_to(arrow, UP, buff=0.10)
+                lbl_txt.move_to(pill.get_center())
+                lbl_group = VGroup(pill, lbl_txt)
+
+                group = VGroup(arrow, lbl_group)
                 group.arrow = arrow
                 group.path = arrow
+                group.label = lbl_group
                 return group
 
             arrow.path = arrow
             return arrow
 
-        # Curved arch if jumping over other nodes
+        # Multi-node jump: curved arch
         start_pt = src_mob.rect.get_top()
         end_pt = tgt_mob.rect.get_top()
         arrow = CurvedArrow(
             start_pt,
             end_pt,
-            angle=-0.75,
+            angle=-0.80,
             color=t.accent_color,
             stroke_width=2.5,
         )
         if edge.label:
-            lbl = Text(
+            lbl_txt = Text(
                 edge.label,
                 font="IBM Plex Mono",
                 font_size=10,
                 color=t.accent_color,
-            ).next_to(arrow, UP, buff=0.08)
-            group = VGroup(arrow, lbl)
+            )
+            pill = RoundedRectangle(
+                corner_radius=0.06,
+                width=lbl_txt.width + 0.18,
+                height=lbl_txt.height + 0.10,
+                fill_color=t.bg_color,
+                fill_opacity=0.95,
+                stroke_color=t.accent_color,
+                stroke_width=1.2,
+            ).next_to(arrow.point_from_proportion(0.5), UP, buff=0.12)
+            lbl_txt.move_to(pill.get_center())
+            lbl_group = VGroup(pill, lbl_txt)
+
+            group = VGroup(arrow, lbl_group)
             group.arrow = arrow
             group.path = arrow
+            group.label = lbl_group
             return group
 
         arrow.path = arrow
@@ -132,6 +198,9 @@ class ManimFlowRenderer:
         )
 
         t = self.flow.theme
+
+        # 0. Measure exact text bounds and recalibrate positions
+        self.prepare_and_measure_nodes()
 
         # Background subtle tech grid
         grid = NumberPlane(
@@ -174,10 +243,12 @@ class ManimFlowRenderer:
                 src_mob = self.node_mobjects.get(action.target_id)
                 tgt_mob = self.node_mobjects.get(action.secondary_id)
                 if src_mob and tgt_mob:
-                    # Find corresponding edge object to trace the path
                     edge_match = None
                     for edge in self.flow.edges:
-                        if edge.source_id == action.target_id and edge.target_id == action.secondary_id:
+                        if (
+                            edge.source_id == action.target_id
+                            and edge.target_id == action.secondary_id
+                        ):
                             edge_match = self.edge_mobjects.get(edge.id)
                             break
 

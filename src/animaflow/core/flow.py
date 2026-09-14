@@ -27,19 +27,30 @@ class Flow:
         subtitle: Optional[str] = None,
         icon: Optional[str] = None,
         shape: NodeShape = NodeShape.ROUNDED_RECT,
-        width: float = 1.6,
-        height: float = 1.3,
+        width: Optional[float] = None,
+        height: Optional[float] = None,
+        min_width: float = 1.7,
+        min_height: float = 1.25,
+        padding: float = 0.50,
         id: Optional[str] = None,
     ) -> Node:
         node_id = id or str(uuid.uuid4())[:8]
+        # Estimativa inicial de largura para auto-layout antes da medição no Manim
+        estimated_w = max(min_width, len(title) * 0.12 + padding * 2)
+        if subtitle:
+            estimated_w = max(estimated_w, len(subtitle) * 0.09 + padding * 2)
+
         node = Node(
             id=node_id,
             title=title,
             subtitle=subtitle,
             icon=icon,
             shape=shape,
-            width=width,
-            height=height,
+            width=width if width is not None else estimated_w,
+            height=height if height is not None else min_height,
+            min_width=min_width,
+            min_height=min_height,
+            padding=padding,
         )
         self.nodes[node.id] = node
         return node
@@ -63,13 +74,17 @@ class Flow:
         return edge
 
     def auto_layout(
-        self, mode: str = "horizontal", spacing: float = 2.2, offset: float = 0.0
+        self,
+        mode: str = "horizontal",
+        gap: float = 0.85,
+        offset: float = 0.0,
+        spacing: Optional[float] = None,
     ) -> "Flow":
         nodes_list = list(self.nodes.values())
         if mode == "horizontal":
-            LayoutEngine.arrange_horizontal(nodes_list, spacing=spacing, y=offset)
+            LayoutEngine.arrange_horizontal(nodes_list, gap=gap, y=offset, spacing=spacing)
         elif mode == "vertical":
-            LayoutEngine.arrange_vertical(nodes_list, spacing=spacing, x=offset)
+            LayoutEngine.arrange_vertical(nodes_list, gap=gap, x=offset, spacing=spacing)
         return self
 
     def render_manim(self, scene: Any) -> Any:

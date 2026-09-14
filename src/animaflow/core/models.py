@@ -30,6 +30,9 @@ class Node:
     status: NodeStatus = NodeStatus.DEFAULT
     width: float = 1.6
     height: float = 1.3
+    min_width: float = 1.6
+    min_height: float = 1.2
+    padding: float = 0.45
     position: Tuple[float, float, float] = (0.0, 0.0, 0.0)
     id: str = field(default_factory=lambda: str(uuid.uuid4())[:8])
     metadata: Dict[str, Any] = field(default_factory=dict)
@@ -48,6 +51,9 @@ class Node:
             "status": self.status.value,
             "width": self.width,
             "height": self.height,
+            "min_width": self.min_width,
+            "min_height": self.min_height,
+            "padding": self.padding,
             "position": list(self.position),
             "metadata": self.metadata,
         }
