@@ -70,4 +70,3 @@ class EventDrivenPipelineAnimation(Scene):
 
         # Render
         flow.render_manim(self)
-

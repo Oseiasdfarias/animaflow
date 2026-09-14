@@ -87,7 +87,9 @@ class Timeline:
         color: Optional[str] = None,
     ) -> "Timeline":
         """Animates a continuous, periodic stream of particle balls flowing across an edge (or all edges)."""
-        src_id = (from_node.id if hasattr(from_node, "id") else str(from_node)) if from_node else None
+        src_id = (
+            (from_node.id if hasattr(from_node, "id") else str(from_node)) if from_node else None
+        )
         tgt_id = (to_node.id if hasattr(to_node, "id") else str(to_node)) if to_node else None
         self.actions.append(
             TimelineAction(
@@ -103,7 +105,6 @@ class Timeline:
             )
         )
         return self
-
 
     def highlight_node(
         self,

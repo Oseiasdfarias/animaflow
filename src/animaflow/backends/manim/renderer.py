@@ -348,7 +348,9 @@ class ManimFlowRenderer:
                         src_mob = self.node_mobjects.get(action.target_id)
                         tgt_mob = self.node_mobjects.get(action.secondary_id)
                         if src_mob and tgt_mob:
-                            target_paths.append(Line(src_mob.rect.get_center(), tgt_mob.rect.get_center()))
+                            target_paths.append(
+                                Line(src_mob.rect.get_center(), tgt_mob.rect.get_center())
+                            )
                 else:
                     # Animate all edges in the diagram simultaneously
                     for edge in self.flow.edges:
@@ -365,7 +367,6 @@ class ManimFlowRenderer:
                     all_particles = []
 
                     def make_group_updater(stream_list):
-
                         def updater(mob, dt):
                             for p_obj, dots in stream_list:
                                 for d in dots:
@@ -373,6 +374,7 @@ class ManimFlowRenderer:
                                     d.move_to(p_obj.point_from_proportion(d.phase))
                                     # Smooth bell-curve fade in at start, fade out at end
                                     d.set_opacity(max(0.0, np.sin(d.phase * np.pi)))
+
                         return updater
 
                     streams = []
@@ -397,8 +399,6 @@ class ManimFlowRenderer:
                     particle_group.clear_updaters()
                     scene.play(FadeOut(particle_group), run_time=0.20)
                     scene.remove(particle_group)
-
-
 
             elif action.action_type == ActionType.HIGHLIGHT_NODE:
                 mob = self.node_mobjects.get(action.target_id)
