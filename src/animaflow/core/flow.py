@@ -35,7 +35,6 @@ class Flow:
         id: Optional[str] = None,
     ) -> Node:
         node_id = id or str(uuid.uuid4())[:8]
-        # Estimativa inicial de largura para auto-layout antes da medição no Manim
         estimated_w = max(min_width, len(title) * 0.12 + padding * 2)
         if subtitle:
             estimated_w = max(estimated_w, len(subtitle) * 0.09 + padding * 2)
@@ -79,12 +78,26 @@ class Flow:
         gap: float = 0.85,
         offset: float = 0.0,
         spacing: Optional[float] = None,
+        min_label_gap: bool = True,
     ) -> "Flow":
         nodes_list = list(self.nodes.values())
         if mode == "horizontal":
-            LayoutEngine.arrange_horizontal(nodes_list, gap=gap, y=offset, spacing=spacing)
+            LayoutEngine.arrange_horizontal(
+                nodes_list,
+                gap=gap,
+                y=offset,
+                spacing=spacing,
+                edges=self.edges,
+                min_label_gap=min_label_gap,
+            )
         elif mode == "vertical":
-            LayoutEngine.arrange_vertical(nodes_list, gap=gap, x=offset, spacing=spacing)
+            LayoutEngine.arrange_vertical(
+                nodes_list,
+                gap=gap,
+                x=offset,
+                spacing=spacing,
+                edges=self.edges,
+            )
         return self
 
     def render_manim(self, scene: Any) -> Any:

@@ -13,7 +13,7 @@ class ManimFlowRenderer:
         self.edge_mobjects: Dict[str, Any] = {}
 
     def prepare_and_measure_nodes(self) -> None:
-        """Measures exact text bounds and adjusts node widths and layout before rendering."""
+        """Measures exact text bounds and adjusts node widths, edge label sizes and layout before rendering."""
         from manim import Text, VGroup, DOWN
 
         t = self.flow.theme
@@ -46,8 +46,20 @@ class ManimFlowRenderer:
             node.width = max(node.min_width, content.width + padding_h * 2)
             node.height = max(node.min_height, content.height + padding_v * 2)
 
-        # 2. Re-run layout to guarantee clear border-to-border gap with true widths
-        self.flow.auto_layout(mode="horizontal", gap=0.80)
+        # 2. Measure actual label widths of adjacent edges to compute exact minimum interval
+        max_adj_label_width = 0.0
+        for edge in self.flow.edges:
+            if edge.label:
+                lbl = Text(edge.label, font="IBM Plex Mono", font_size=10)
+                # Pill pill width = label width + margins
+                pill_w = lbl.width + 0.20
+                max_adj_label_width = max(max_adj_label_width, pill_w)
+
+        # Minimum interval between blocks = label width + clear margin on both sides (min 0.95)
+        required_gap = max(0.95, max_adj_label_width + 0.35)
+
+        # 3. Re-run layout to guarantee clear border-to-border gap with true widths
+        self.flow.auto_layout(mode="horizontal", gap=required_gap, min_label_gap=False)
 
     def build_node_mobject(self, node: Node) -> Any:
         from manim import RoundedRectangle, Text, VGroup, DOWN
@@ -108,7 +120,7 @@ class ManimFlowRenderer:
         dy = tgt_pos[1] - src_pos[1]
 
         # Adjacent direct connection
-        if abs(dy) < 0.1 and abs(dx) < 3.2:
+        if abs(dy) < 0.1 and abs(dx) < 3.5:
             arrow = Arrow(
                 src_mob.rect.get_right(),
                 tgt_mob.rect.get_left(),
@@ -126,7 +138,7 @@ class ManimFlowRenderer:
                 )
                 pill = RoundedRectangle(
                     corner_radius=0.06,
-                    width=lbl_txt.width + 0.16,
+                    width=lbl_txt.width + 0.18,
                     height=lbl_txt.height + 0.10,
                     fill_color=t.bg_color,
                     fill_opacity=0.95,
