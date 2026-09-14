@@ -48,6 +48,10 @@ _media/
 output/
 dist_web/
 
+# Allow docs assets
+!docs/assets/**
+
+
 # IDEs
 .idea/
 .vscode/
