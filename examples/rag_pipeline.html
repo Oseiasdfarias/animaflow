@@ -119,14 +119,17 @@
   },
   "nodes": [
     {
-      "id": "4c0c1b03",
+      "id": "4f225ceb",
       "title": "Client",
       "subtitle": "Browser / App",
       "icon": "user",
       "shape": "rounded_rect",
       "status": "default",
-      "width": 1.6,
-      "height": 1.3,
+      "width": 2.17,
+      "height": 1.25,
+      "min_width": 1.7,
+      "min_height": 1.25,
+      "padding": 0.5,
       "position": [
         -3.3000000000000003,
         0.0,
@@ -135,14 +138,17 @@
       "metadata": {}
     },
     {
-      "id": "bbb64c4d",
+      "id": "cb2218d3",
       "title": "API Gateway",
       "subtitle": "FastAPI",
       "icon": "server",
       "shape": "rounded_rect",
       "status": "default",
-      "width": 1.6,
-      "height": 1.3,
+      "width": 2.32,
+      "height": 1.25,
+      "min_width": 1.7,
+      "min_height": 1.25,
+      "padding": 0.5,
       "position": [
         -1.1,
         0.0,
@@ -151,14 +157,17 @@
       "metadata": {}
     },
     {
-      "id": "91dd6940",
+      "id": "c99c1d86",
       "title": "Vector DB",
       "subtitle": "Qdrant / Milvus",
       "icon": "database",
       "shape": "rounded_rect",
       "status": "default",
-      "width": 1.6,
-      "height": 1.3,
+      "width": 2.3499999999999996,
+      "height": 1.25,
+      "min_width": 1.7,
+      "min_height": 1.25,
+      "padding": 0.5,
       "position": [
         1.1,
         0.0,
@@ -167,14 +176,17 @@
       "metadata": {}
     },
     {
-      "id": "26a0b544",
+      "id": "af7806bb",
       "title": "LLM Engine",
       "subtitle": "Claude 3.5",
       "icon": "cpu",
       "shape": "rounded_rect",
       "status": "default",
-      "width": 1.6,
-      "height": 1.3,
+      "width": 2.2,
+      "height": 1.25,
+      "min_width": 1.7,
+      "min_height": 1.25,
+      "padding": 0.5,
       "position": [
         3.3000000000000003,
         0.0,
@@ -185,27 +197,27 @@
   ],
   "edges": [
     {
-      "id": "8da3d3d6",
-      "source_id": "4c0c1b03",
-      "target_id": "bbb64c4d",
+      "id": "3a584e40",
+      "source_id": "4f225ceb",
+      "target_id": "cb2218d3",
       "label": "Prompt",
       "style": "solid",
       "animated_packet": false,
       "metadata": {}
     },
     {
-      "id": "e34b4fc4",
-      "source_id": "bbb64c4d",
-      "target_id": "91dd6940",
+      "id": "5d5e6bec",
+      "source_id": "cb2218d3",
+      "target_id": "c99c1d86",
       "label": "Query Vector",
       "style": "solid",
       "animated_packet": false,
       "metadata": {}
     },
     {
-      "id": "ec41913a",
-      "source_id": "bbb64c4d",
-      "target_id": "26a0b544",
+      "id": "d7a951aa",
+      "source_id": "cb2218d3",
+      "target_id": "af7806bb",
       "label": "Context + Prompt",
       "style": "solid",
       "animated_packet": false,
@@ -224,23 +236,23 @@
       },
       {
         "action_type": "send_packet",
-        "target_id": "4c0c1b03",
-        "secondary_id": "bbb64c4d",
+        "target_id": "4f225ceb",
+        "secondary_id": "cb2218d3",
         "duration": 1.0,
         "payload": "POST /ask",
         "params": {}
       },
       {
         "action_type": "send_packet",
-        "target_id": "bbb64c4d",
-        "secondary_id": "91dd6940",
+        "target_id": "cb2218d3",
+        "secondary_id": "c99c1d86",
         "duration": 1.0,
         "payload": "search_knn()",
         "params": {}
       },
       {
         "action_type": "highlight_node",
-        "target_id": "91dd6940",
+        "target_id": "c99c1d86",
         "secondary_id": null,
         "duration": 0.8,
         "payload": null,
@@ -250,15 +262,15 @@
       },
       {
         "action_type": "send_packet",
-        "target_id": "bbb64c4d",
-        "secondary_id": "26a0b544",
+        "target_id": "cb2218d3",
+        "secondary_id": "af7806bb",
         "duration": 1.0,
         "payload": "stream_tokens()",
         "params": {}
       },
       {
         "action_type": "highlight_node",
-        "target_id": "26a0b544",
+        "target_id": "af7806bb",
         "secondary_id": null,
         "duration": 0.8,
         "payload": null,
@@ -347,9 +359,12 @@
       });
     }
 
+    let activeStreamIntervals = [];
+
     function playAnimation() {
-      // Packet animation example along edges
-      flowData.edges.forEach((edge, idx) => {
+      resetFlow();
+      // Continuous particle stream across all edges
+      flowData.edges.forEach((edge, edgeIdx) => {
         const src = flowData.nodes.find(n => n.id === edge.source_id);
         const tgt = flowData.nodes.find(n => n.id === edge.target_id);
         if (src && tgt) {
@@ -358,32 +373,47 @@
           const x2 = W/2 + tgt.position[0] * 120 - 70;
           const y2 = H/2 - tgt.position[1] * 120;
 
-          const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-          circle.setAttribute("r", "5");
-          circle.setAttribute("fill", "#F59E0B");
-          circle.setAttribute("cx", x1);
-          circle.setAttribute("cy", y1);
-          svg.appendChild(circle);
+          // Spawn stream of periodic particles
+          const spawnParticle = () => {
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("r", "5");
+            circle.setAttribute("fill", "#F59E0B");
+            circle.setAttribute("cx", x1);
+            circle.setAttribute("cy", y1);
+            svg.appendChild(circle);
 
-          const anim = circle.animate([
-            { cx: x1, cy: y1, opacity: 0 },
-            { opacity: 1, offset: 0.1 },
-            { cx: x2, cy: y2, opacity: 1, offset: 0.9 },
-            { cx: x2, cy: y2, opacity: 0 }
-          ], {
-            duration: 1200,
-            delay: idx * 800,
-            fill: "forwards"
-          });
+            const anim = circle.animate([
+              { cx: x1, cy: y1, opacity: 0 },
+              { opacity: 1, offset: 0.1 },
+              { cx: x2, cy: y2, opacity: 1, offset: 0.9 },
+              { cx: x2, cy: y2, opacity: 0 }
+            ], {
+              duration: 1400,
+              easing: "linear",
+              fill: "forwards"
+            });
 
-          anim.onfinish = () => circle.remove();
+            anim.onfinish = () => circle.remove();
+          };
+
+          // Initial wave
+          for (let i = 0; i < 3; i++) {
+            setTimeout(spawnParticle, i * 420);
+          }
+
+          // Periodic continuous stream
+          const interval = setInterval(spawnParticle, 450);
+          activeStreamIntervals.push(interval);
         }
       });
     }
 
     function resetFlow() {
+      activeStreamIntervals.forEach(clearInterval);
+      activeStreamIntervals = [];
       renderDiagram();
     }
+
 
     renderDiagram();
   </script>

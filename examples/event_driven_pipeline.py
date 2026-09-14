@@ -58,25 +58,16 @@ class EventDrivenPipelineAnimation(Scene):
         )
 
         # Interactive Timeline
-        flow.timeline.reveal_sequence(delay_per_item=0.20)
+        flow.timeline.reveal_sequence(delay_per_item=0.18)
 
-        # Step 1: Ingestion
-        flow.timeline.send_packet(gateway, kafka, duration=0.55)
-        flow.timeline.highlight_node(kafka, status="active", duration=0.4)
+        # Continuous streaming animation of particles across all branches
+        flow.timeline.stream_packets(count=4, speed=0.75, duration=3.2)
 
-        # Step 2: Parallel Stream Fan-out
-        flow.timeline.send_packet(kafka, flink, duration=0.55)
-        flow.timeline.send_packet(kafka, indexer, duration=0.55)
-        flow.timeline.highlight_node(flink, status="active", duration=0.45)
-        flow.timeline.highlight_node(indexer, status="active", duration=0.45)
-
-        # Step 3: Sink to Datastores
-        flow.timeline.send_packet(flink, redis, duration=0.55)
-        flow.timeline.send_packet(indexer, postgres, duration=0.55)
+        # Highlight sink states
         flow.timeline.highlight_node(redis, status="success", duration=0.6)
         flow.timeline.highlight_node(postgres, status="success", duration=0.6)
-
-        flow.timeline.wait(1.5)
+        flow.timeline.wait(1.0)
 
         # Render
         flow.render_manim(self)
+

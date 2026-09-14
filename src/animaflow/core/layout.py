@@ -110,7 +110,7 @@ class LayoutEngine:
 
         num_layers = len(layers)
         layer_max_widths = [max((node.width for node in layer), default=1.5) for layer in layers]
-        
+
         # Calculate total width across layers with h_gap
         total_width = sum(layer_max_widths) + (num_layers - 1) * h_gap
         current_x = -total_width / 2.0
@@ -120,4 +120,3 @@ class LayoutEngine:
             # Arrange nodes in this layer vertically
             LayoutEngine.arrange_vertical(layer, gap=v_gap, x=center_x)
             current_x += max_w + h_gap
-

@@ -42,12 +42,9 @@ class AgentSwarmAnimation(Scene):
         flow.connect(search_agent, critic, label="citations")
 
         # Automatically layout DAG in 4 clear stages with comfortable horizontal & vertical gaps
-        flow.auto_layout_layers([
-            [user],
-            [orchestrator],
-            [code_agent, search_agent],
-            [critic]
-        ], h_gap=1.20, v_gap=1.00)
+        flow.auto_layout_layers(
+            [[user], [orchestrator], [code_agent, search_agent], [critic]], h_gap=1.20, v_gap=1.00
+        )
 
         # Timeline Narrative
         flow.timeline.reveal_sequence(delay_per_item=0.25)

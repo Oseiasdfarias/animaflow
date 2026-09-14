@@ -156,7 +156,9 @@ class ManimFlowRenderer:
                 color=t.accent_color,
                 stroke_width=2.5,
             )
-            return self._wrap_edge_label(arrow, edge.label, t, UP, 0.12, is_accent=True, use_proportion=True)
+            return self._wrap_edge_label(
+                arrow, edge.label, t, UP, 0.12, is_accent=True, use_proportion=True
+            )
 
         # Case 4: Diagonal / Branch connection (e.g., Orchestrator -> Code / Search)
         import numpy as np
@@ -191,7 +193,6 @@ class ManimFlowRenderer:
             perp = np.array([0.0, 1.0, 0.0])
 
         return self._wrap_edge_label(arrow, edge.label, t, perp, 0.18, use_proportion=True)
-
 
     def _wrap_edge_label(
         self,
@@ -254,6 +255,7 @@ class ManimFlowRenderer:
             FadeOut,
             Flash,
             NumberPlane,
+            VGroup,
         )
 
         t = self.flow.theme
@@ -325,6 +327,78 @@ class ManimFlowRenderer:
                         run_time=action.duration,
                     )
                     scene.play(FadeOut(dot, scale=1.5), run_time=0.15)
+
+            elif action.action_type == ActionType.STREAM_PACKETS:
+                import numpy as np
+
+                # Determine paths to animate (single edge or all edges)
+                target_paths = []
+                if action.target_id and action.secondary_id:
+                    for edge in self.flow.edges:
+                        if (
+                            edge.source_id == action.target_id
+                            and edge.target_id == action.secondary_id
+                        ):
+                            edge_match = self.edge_mobjects.get(edge.id)
+                            p = getattr(edge_match, "path", None) if edge_match else None
+                            if p:
+                                target_paths.append(p)
+                            break
+                    if not target_paths:
+                        src_mob = self.node_mobjects.get(action.target_id)
+                        tgt_mob = self.node_mobjects.get(action.secondary_id)
+                        if src_mob and tgt_mob:
+                            target_paths.append(Line(src_mob.rect.get_center(), tgt_mob.rect.get_center()))
+                else:
+                    # Animate all edges in the diagram simultaneously
+                    for edge in self.flow.edges:
+                        edge_match = self.edge_mobjects.get(edge.id)
+                        p = getattr(edge_match, "path", None) if edge_match else None
+                        if p:
+                            target_paths.append(p)
+
+                if target_paths:
+                    count = int(action.params.get("count", 5))
+                    speed = float(action.params.get("speed", 0.65))
+                    color = action.params.get("color") or t.accent_color
+
+                    all_particles = []
+
+                    def make_group_updater(stream_list):
+
+                        def updater(mob, dt):
+                            for p_obj, dots in stream_list:
+                                for d in dots:
+                                    d.phase = (d.phase + dt * speed) % 1.0
+                                    d.move_to(p_obj.point_from_proportion(d.phase))
+                                    # Smooth bell-curve fade in at start, fade out at end
+                                    d.set_opacity(max(0.0, np.sin(d.phase * np.pi)))
+                        return updater
+
+                    streams = []
+                    for path_obj in target_paths:
+                        path_dots = []
+                        for i in range(count):
+                            d = Dot(radius=0.08, color=color)
+                            d.phase = i / count
+                            d.move_to(path_obj.point_from_proportion(d.phase))
+                            d.set_opacity(np.sin(d.phase * np.pi))
+                            path_dots.append(d)
+                            all_particles.append(d)
+                        streams.append((path_obj, path_dots))
+
+                    particle_group = VGroup(*all_particles)
+                    group_updater = make_group_updater(streams)
+                    particle_group.add_updater(group_updater)
+                    scene.add(particle_group)
+
+                    scene.wait(action.duration)
+
+                    particle_group.clear_updaters()
+                    scene.play(FadeOut(particle_group), run_time=0.20)
+                    scene.remove(particle_group)
+
+
 
             elif action.action_type == ActionType.HIGHLIGHT_NODE:
                 mob = self.node_mobjects.get(action.target_id)

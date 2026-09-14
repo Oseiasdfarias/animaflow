@@ -118,7 +118,6 @@ class Flow:
         LayoutEngine.arrange_layers(resolved_layers, h_gap=h_gap, v_gap=v_gap)
         return self
 
-
     def render_manim(self, scene: Any) -> Any:
         """Helper to render this flow into an active Manim scene."""
         from ..backends.manim.renderer import ManimFlowRenderer

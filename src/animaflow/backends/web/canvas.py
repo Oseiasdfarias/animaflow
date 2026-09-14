@@ -191,9 +191,12 @@ class WebCanvasExporter:
       }});
     }}
 
+    let activeStreamIntervals = [];
+
     function playAnimation() {{
-      // Packet animation example along edges
-      flowData.edges.forEach((edge, idx) => {{
+      resetFlow();
+      // Continuous particle stream across all edges
+      flowData.edges.forEach((edge, edgeIdx) => {{
         const src = flowData.nodes.find(n => n.id === edge.source_id);
         const tgt = flowData.nodes.find(n => n.id === edge.target_id);
         if (src && tgt) {{
@@ -202,32 +205,47 @@ class WebCanvasExporter:
           const x2 = W/2 + tgt.position[0] * 120 - 70;
           const y2 = H/2 - tgt.position[1] * 120;
 
-          const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-          circle.setAttribute("r", "5");
-          circle.setAttribute("fill", "{t.accent_color}");
-          circle.setAttribute("cx", x1);
-          circle.setAttribute("cy", y1);
-          svg.appendChild(circle);
+          // Spawn stream of periodic particles
+          const spawnParticle = () => {{
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("r", "5");
+            circle.setAttribute("fill", "{t.accent_color}");
+            circle.setAttribute("cx", x1);
+            circle.setAttribute("cy", y1);
+            svg.appendChild(circle);
 
-          const anim = circle.animate([
-            {{ cx: x1, cy: y1, opacity: 0 }},
-            {{ opacity: 1, offset: 0.1 }},
-            {{ cx: x2, cy: y2, opacity: 1, offset: 0.9 }},
-            {{ cx: x2, cy: y2, opacity: 0 }}
-          ], {{
-            duration: 1200,
-            delay: idx * 800,
-            fill: "forwards"
-          }});
+            const anim = circle.animate([
+              {{ cx: x1, cy: y1, opacity: 0 }},
+              {{ opacity: 1, offset: 0.1 }},
+              {{ cx: x2, cy: y2, opacity: 1, offset: 0.9 }},
+              {{ cx: x2, cy: y2, opacity: 0 }}
+            ], {{
+              duration: 1400,
+              easing: "linear",
+              fill: "forwards"
+            }});
 
-          anim.onfinish = () => circle.remove();
+            anim.onfinish = () => circle.remove();
+          }};
+
+          // Initial wave
+          for (let i = 0; i < 3; i++) {{
+            setTimeout(spawnParticle, i * 420);
+          }}
+
+          // Periodic continuous stream
+          const interval = setInterval(spawnParticle, 450);
+          activeStreamIntervals.push(interval);
         }}
       }});
     }}
 
     function resetFlow() {{
+      activeStreamIntervals.forEach(clearInterval);
+      activeStreamIntervals = [];
       renderDiagram();
     }}
+
 
     renderDiagram();
   </script>

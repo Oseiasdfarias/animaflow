@@ -7,6 +7,7 @@ class ActionType(str, Enum):
     REVEAL_ALL = "reveal_all"
     REVEAL_SEQUENCE = "reveal_sequence"
     SEND_PACKET = "send_packet"
+    STREAM_PACKETS = "stream_packets"
     HIGHLIGHT_NODE = "highlight_node"
     TRANSITION_NODE = "transition_node"
     WAIT = "wait"
@@ -75,6 +76,34 @@ class Timeline:
             )
         )
         return self
+
+    def stream_packets(
+        self,
+        from_node: Optional[Any] = None,
+        to_node: Optional[Any] = None,
+        count: int = 5,
+        speed: float = 0.65,
+        duration: float = 2.5,
+        color: Optional[str] = None,
+    ) -> "Timeline":
+        """Animates a continuous, periodic stream of particle balls flowing across an edge (or all edges)."""
+        src_id = (from_node.id if hasattr(from_node, "id") else str(from_node)) if from_node else None
+        tgt_id = (to_node.id if hasattr(to_node, "id") else str(to_node)) if to_node else None
+        self.actions.append(
+            TimelineAction(
+                action_type=ActionType.STREAM_PACKETS,
+                target_id=src_id,
+                secondary_id=tgt_id,
+                duration=duration,
+                params={
+                    "count": count,
+                    "speed": speed,
+                    "color": color,
+                },
+            )
+        )
+        return self
+
 
     def highlight_node(
         self,
