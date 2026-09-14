@@ -11,16 +11,16 @@
 </p>
 
 <p align="center">
-  <a href="https://pypi.org/project/animaflow/"><img alt="PyPI version" src="https://img.shields.io/badge/pypi-animaflow-007ACC?style=for-the-badge&logo=pypi&logoColor=white"/></a>
-  <a href="https://opensource.org/licenses/MIT"><img alt="License MIT" src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge"/></a>
-  <a href="https://github.com/Oseiasdfarias/animaflow/actions"><img alt="Build Status" src="https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white"/></a>
-  <a href="https://github.com/Oseiasdfarias/animaflow"><img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10+-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"/></a>
+  <a href="https://pypi.org/project/animaflow/"><img alt="PyPI version" src="https://img.shields.io/badge/pypi-animaflow-5C9E89?style=for-the-badge&logo=pypi&logoColor=white"/></a>
+  <a href="https://opensource.org/licenses/MIT"><img alt="License MIT" src="https://img.shields.io/badge/license-MIT-1A2024?style=for-the-badge&logoColor=white"/></a>
+  <a href="https://github.com/Oseiasdfarias/animaflow/actions"><img alt="Build Status" src="https://img.shields.io/badge/build-passing-5C9E89?style=for-the-badge&logo=githubactions&logoColor=white"/></a>
+  <a href="https://github.com/Oseiasdfarias/animaflow"><img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10+-121619?style=for-the-badge&logo=python&logoColor=9EC8B9"/></a>
 </p>
 
 <p align="center">
-  <img alt="Manim" src="https://img.shields.io/badge/Manim%20CE-Community-e07a5f?style=for-the-badge&logoColor=white"/>
-  <img alt="SVG" src="https://img.shields.io/badge/SVG-HTML5-FFB13B?style=for-the-badge&logo=html5&logoColor=white"/>
-  <img alt="TypeScript / Web" src="https://img.shields.io/badge/Web%20Canvas-JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
+  <img alt="Manim" src="https://img.shields.io/badge/Manim%20CE-Community-1A2024?style=for-the-badge&logoColor=white"/>
+  <img alt="SVG" src="https://img.shields.io/badge/SVG-HTML5-5C9E89?style=for-the-badge&logo=html5&logoColor=white"/>
+  <img alt="TypeScript / Web" src="https://img.shields.io/badge/Web%20Canvas-JavaScript-121619?style=for-the-badge&logo=javascript&logoColor=9EC8B9"/>
   <img alt="Git" src="https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white"/>
 </p>
 
@@ -31,6 +31,7 @@
   <a href="#-instalação">Instalação</a> ·
   <a href="#-começando-rápido">Começando Rápido</a> ·
   <a href="#-exemplos-prontos">Exemplos Prontos</a> ·
+  <a href="#-identidade-visual">Identidade Visual</a> ·
   <a href="#-estrutura-do-repositório">Estrutura</a> ·
   <a href="#-roadmap-e-próximos-passos">Roadmap</a> ·
   <a href="#-autoria--licença">Autoria & Licença</a>
@@ -161,13 +162,32 @@ O repositório inclui exemplos completos na pasta [`examples/`](./examples/):
 
 ---
 
+## 🎨 Identidade Visual (Nordic Sage & Carbon)
+
+A identidade visual do **animaflow** foi concebida com princípios de design editorial nórdico e precisão industrial, evitando gradientes genéricos e priorizando contraste técnico:
+
+<p align="center">
+  <img src="./brand/png/banner-hero-1280.png" width="850" alt="Banner Oficial animaflow">
+</p>
+
+- **Símbolo**: Três nós de arquitetura dispostos em triangulação fechada por um circuito orbital contínuo de dados.
+- **Tipografia**: **IBM Plex Sans SemiBold** com curvas vetoriais extraídas via `fontTools` (sem dependência de fontes externas instaladas).
+- **Pacote Completo**: Disponível no diretório [`brand/`](./brand/) com versões em SVG puro, PNGs rasterizados via PyCairo (16px a 1600px), favicons e guia de uso em [`brand/README.md`](./brand/README.md).
+
+---
+
 ## 📁 Estrutura do Repositório
 
 ```
 animaflow/
-├── docs/                       # Documentação técnica, arquitetura e assets visuais
+├── brand/                      # Identidade visual oficial (Nordic Sage & Carbon)
+│   ├── README.md               # Especificação de design, paleta e regras de aplicação
+│   ├── scripts/                # Scripts autônomos de geração (PyCairo + fontTools)
+│   ├── svg/                    # SVGs de alta precisão com tipografia em curvas
+│   └── png/                    # PNGs rasterizados em alta resolução (16px a 1600px)
+├── docs/                       # Documentação técnica de implementação e assets
 │   ├── IMPLEMENTATION_OVERVIEW.md  # Status detalhado das implementações e roadmap
-│   └── assets/                 # Mídias, capturas e GIFs demonstrativos
+│   └── assets/                 # Demonstrações, capturas e GIFs do pipeline
 ├── src/
 │   └── animaflow/
 │       ├── core/               # Modelos (Flow, Node, Edge, Layout, Timeline)
@@ -175,7 +195,7 @@ animaflow/
 │       │   ├── layout.py
 │       │   └── timeline.py
 │       └── backends/           # Renderizadores plugáveis
-│           ├── manim/          # Integração Manim CE (Mobjects, animações, shaders)
+│           ├── manim/          # Integração Manim CE (Mobjects vetoriais e animações)
 │           └── web/            # Gerador de Canvas SVG interativo
 ├── examples/                   # Scripts de demonstração prontos para rodar
 ├── tests/                      # Bateria de testes unitários e de integração
@@ -194,6 +214,7 @@ Para uma visão detalhada do que já foi construído e das próximas entregas, c
 - [x] Renderizador vetorial Manim com suporte a temas e subtítulos
 - [x] Animação de pacotes discretos e **stream contínuo de partículas**
 - [x] Exportador para Web Canvas SVG interativo
+- [x] Identidade visual oficial **Nordic Sage & Carbon** (SVGs, PNGs, Favicons, Banner)
 - [ ] Controles interativos no Web Canvas (Play/Pause, Zoom e Pan)
 - [ ] Suporte nativo a **Diagramas de Sequência** (`SequenceDiagram`)
 - [ ] API de estilização avançada (formas de nós customizadas, estilos de setas e gradientes)
