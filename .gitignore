@@ -48,9 +48,15 @@ _media/
 output/
 dist_web/
 
+# Documentation build
+site/
+.venv_docs/
+
 # Allow docs assets & brand identity
 !docs/assets/**
+!docs/brand/**
 !brand/**
+
 
 
 # IDEs

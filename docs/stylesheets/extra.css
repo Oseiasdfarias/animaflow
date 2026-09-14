@@ -1,0 +1,245 @@
+/* ==========================================================================
+   animaflow — Custom Design System (Nordic Sage & Carbon Theme)
+   Material for MkDocs custom stylesheet
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* --- Tipografia Global --- */
+:root {
+  --md-text-font: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --md-code-font: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* ==========================================================================
+   Tema Escuro: Carbon & Nordic Sage
+   ========================================================================== */
+[data-md-color-scheme="slate"] {
+  /* Cores de Fundo */
+  --md-default-bg-color: #121619;          /* Carvão Mineral */
+  --md-default-bg-color--light: #1A2024;   /* Superfície de Cartões */
+  --md-default-bg-color--lighter: #242D33; /* Hover e Divisores */
+
+  /* Texto e Contraste */
+  --md-default-fg-color: #D7EBE3;          /* Sálvia Gélido para leitura confortável */
+  --md-default-fg-color--light: #9EC8B9;   /* Sálvia Claro */
+  --md-default-fg-color--lighter: #5C9E89; /* Jade Técnico */
+
+  /* Cores Primária e Acento */
+  --md-primary-fg-color: #1A2024;
+  --md-primary-fg-color--dark: #121619;
+  --md-primary-bg-color: #D7EBE3;
+  --md-accent-fg-color: #9EC8B9;
+  --md-accent-bg-color: #121619;
+
+  /* Bordas e Sombras */
+  --md-border-color: #242D33;
+  --md-shadow-z1: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+  /* Blocos de Código */
+  --md-code-bg-color: #0E1214;
+  --md-code-fg-color: #D7EBE3;
+  --md-code-hl-color: rgba(158, 200, 185, 0.15);
+}
+
+/* ==========================================================================
+   Tema Claro: Papel Nórdico & Tinta Grafite
+   ========================================================================== */
+[data-md-color-scheme="default"] {
+  --md-default-bg-color: #F2F6F4;
+  --md-default-bg-color--light: #FFFFFF;
+  --md-default-bg-color--lighter: #E5EDE9;
+
+  --md-default-fg-color: #162420;
+  --md-default-fg-color--light: #37594E;
+  --md-default-fg-color--lighter: #5C9E89;
+
+  --md-primary-fg-color: #37594E;
+  --md-primary-fg-color--dark: #162420;
+  --md-accent-fg-color: #5C9E89;
+
+  --md-border-color: #D5E2DC;
+
+  --md-code-bg-color: #E8EFEA;
+  --md-code-fg-color: #162420;
+}
+
+/* --- Header / Top Navigation Bar --- */
+.md-header {
+  border-bottom: 1px solid var(--md-border-color);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.md-header__topic {
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+/* --- Sidebar e Navegação --- */
+.md-nav__link--active {
+  font-weight: 600;
+  color: var(--md-accent-fg-color) !important;
+}
+
+.md-nav__link:hover {
+  color: var(--md-default-fg-color--light);
+}
+
+/* --- Títulos e Tipografia Editorial --- */
+h1, h2, h3, h4 {
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+
+h1 {
+  border-bottom: 1px solid var(--md-border-color);
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+}
+
+/* --- Blocos de Código (Code Annotations & Ligatures) --- */
+.md-typeset code {
+  font-family: var(--md-code-font);
+  font-variant-ligatures: normal;
+  border-radius: 5px;
+  padding: 0.15em 0.4em;
+  font-size: 0.86em;
+}
+
+.md-typeset pre > code {
+  padding: 16px;
+  font-size: 0.88em;
+  line-height: 1.6;
+  border: 1px solid var(--md-border-color);
+}
+
+/* Botão de cópia de código refinado */
+.md-clipboard {
+  color: var(--md-default-fg-color--light);
+}
+
+.md-clipboard:hover {
+  color: var(--md-accent-fg-color);
+}
+
+/* --- Caixas de Aviso (Admonitions) --- */
+.md-typeset .admonition {
+  border-left-width: 4px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.md-typeset .admonition.note,
+.md-typeset .admonition.info {
+  border-left-color: #5C9E89;
+}
+
+.md-typeset .admonition.tip {
+  border-left-color: #9EC8B9;
+}
+
+.md-typeset .admonition.warning {
+  border-left-color: #E5A93C;
+}
+
+/* --- Tabelas Técnicas Elegantes --- */
+.md-typeset table:not([class]) {
+  border-collapse: collapse;
+  border: 1px solid var(--md-border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.9em;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-default-bg-color--light);
+  color: var(--md-default-fg-color);
+  font-weight: 600;
+  border-bottom: 1px solid var(--md-border-color);
+}
+
+.md-typeset table:not([class]) td {
+  border-bottom: 1px solid var(--md-border-color);
+}
+
+/* --- Hero Banner Card (Para a página inicial) --- */
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px 30px;
+  margin-bottom: 40px;
+  background: var(--md-default-bg-color--light);
+  border: 1px solid var(--md-border-color);
+  border-radius: 16px;
+}
+
+.hero-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(158, 200, 185, 0.1);
+  color: #9EC8B9;
+  border: 1px solid rgba(158, 200, 185, 0.25);
+  margin-bottom: 16px;
+}
+
+.hero-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  margin-bottom: 12px;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--md-default-fg-color--light);
+  max-width: 650px;
+  margin-bottom: 24px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 8px;
+  background: #5C9E89;
+  color: #121619 !important;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #9EC8B9;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--md-default-fg-color) !important;
+  border: 1px solid var(--md-border-color);
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--md-default-bg-color--lighter);
+  transform: translateY(-2px);
+}

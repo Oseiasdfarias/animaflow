@@ -11,9 +11,10 @@
 </p>
 
 <p align="center">
+  <a href="https://oseiasdfarias.github.io/animaflow/"><img alt="Documentação Online" src="https://img.shields.io/badge/docs-online-1A2024?style=for-the-badge&logo=materialformkdocs&logoColor=9EC8B9"/></a>
+  <a href="https://github.com/Oseiasdfarias/animaflow/actions/workflows/docs.yml"><img alt="Build da documentação" src="https://img.shields.io/github/actions/workflow/status/Oseiasdfarias/animaflow/docs.yml?branch=main&style=for-the-badge&label=build%20docs&logo=githubactions&logoColor=white"/></a>
   <a href="https://pypi.org/project/animaflow/"><img alt="PyPI version" src="https://img.shields.io/badge/pypi-animaflow-5C9E89?style=for-the-badge&logo=pypi&logoColor=white"/></a>
   <a href="https://opensource.org/licenses/MIT"><img alt="License MIT" src="https://img.shields.io/badge/license-MIT-1A2024?style=for-the-badge&logoColor=white"/></a>
-  <a href="https://github.com/Oseiasdfarias/animaflow/actions"><img alt="Build Status" src="https://img.shields.io/badge/build-passing-5C9E89?style=for-the-badge&logo=githubactions&logoColor=white"/></a>
   <a href="https://github.com/Oseiasdfarias/animaflow"><img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10+-121619?style=for-the-badge&logo=python&logoColor=9EC8B9"/></a>
 </p>
 

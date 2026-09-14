@@ -1,0 +1,113 @@
+site_name: animaflow
+site_description: Diagramas e fluxogramas de arquitetura declarativos, animados e programáveis em Python
+site_author: Oséias Farias
+site_url: https://oseiasdfarias.github.io/animaflow/
+
+repo_url: https://github.com/Oseiasdfarias/animaflow
+repo_name: Oseiasdfarias/animaflow
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: pt-BR
+  favicon: brand/svg/favicon.svg
+  logo: brand/svg/icone.svg
+  icon:
+    repo: fontawesome/brands/github
+  font: false  # Usamos Google Fonts customizadas no extra.css (IBM Plex Sans & Fira Code)
+  features:
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+    - navigation.tracking
+    - navigation.sections
+    - navigation.path
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Alternar para tema claro
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Alternar para tema escuro
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - pymdownx.tasklist
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.betterem
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            show_if_no_docstring: true
+            show_signature_annotations: true
+            members_order: source
+            docstring_style: google
+
+copyright: Copyright &copy; 2026 Oséias Farias. Licença MIT.
+
+nav:
+  - Início: index.md
+  - Começando:
+      - Instalação: getting-started/installation.md
+      - Primeiro Diagrama: getting-started/quickstart.md
+      - Conceitos Fundamentais: getting-started/core-concepts.md
+  - Guia de Uso:
+      - Declarando Nós e Conexões: guides/nodes-and-edges.md
+      - Layout em Camadas (DAGs): guides/auto-layout.md
+      - Linha do Tempo e Ações: guides/timeline-animations.md
+      - Fluxo Contínuo de Partículas: guides/continuous-stream.md
+  - Motores de Renderização:
+      - Manim (Vídeos & GIFs): backends/manim.md
+      - Web Canvas (HTML & SVG): backends/web-canvas.md
+  - Galeria & Exemplos:
+      - Pipeline de Eventos: gallery/event-driven.md
+      - Swarm Multi-Agente: gallery/multi-agent-swarm.md
+      - Pipeline de RAG: gallery/rag-pipeline.md
+  - Referência da API:
+      - Flow: api/flow.md
+      - LayoutEngine: api/layout.md
+      - Timeline: api/timeline.md
+  - Identidade Visual & Marca:
+      - Guia da Marca (Nordic Sage): brand/index.md
+      - Paleta e Assets: brand/assets.md
+  - Planejamento & Roadmap: IMPLEMENTATION_OVERVIEW.md
+
