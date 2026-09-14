@@ -100,6 +100,25 @@ class Flow:
             )
         return self
 
+    def auto_layout_layers(
+        self,
+        layers: List[List[Union[Node, str]]],
+        h_gap: float = 1.20,
+        v_gap: float = 0.90,
+    ) -> "Flow":
+        """Arranges nodes into columnar tiers/stages with clean vertical & horizontal intervals."""
+        resolved_layers: List[List[Node]] = []
+        for layer in layers:
+            col = []
+            for item in layer:
+                node = self.nodes[item] if isinstance(item, str) else item
+                col.append(node)
+            resolved_layers.append(col)
+
+        LayoutEngine.arrange_layers(resolved_layers, h_gap=h_gap, v_gap=v_gap)
+        return self
+
+
     def render_manim(self, scene: Any) -> Any:
         """Helper to render this flow into an active Manim scene."""
         from ..backends.manim.renderer import ManimFlowRenderer

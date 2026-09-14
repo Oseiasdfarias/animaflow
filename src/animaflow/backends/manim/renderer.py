@@ -46,20 +46,18 @@ class ManimFlowRenderer:
             node.width = max(node.min_width, content.width + padding_h * 2)
             node.height = max(node.min_height, content.height + padding_v * 2)
 
-        # 2. Measure actual label widths of adjacent edges to compute exact minimum interval
-        max_adj_label_width = 0.0
-        for edge in self.flow.edges:
-            if edge.label:
-                lbl = Text(edge.label, font="IBM Plex Mono", font_size=10)
-                # Pill pill width = label width + margins
-                pill_w = lbl.width + 0.20
-                max_adj_label_width = max(max_adj_label_width, pill_w)
+        # 2. Check if nodes already have custom/2D positions or need auto layout
+        has_custom_positions = any(n.position != (0.0, 0.0, 0.0) for n in self.flow.nodes.values())
+        if not has_custom_positions:
+            max_adj_label_width = 0.0
+            for edge in self.flow.edges:
+                if edge.label:
+                    lbl = Text(edge.label, font="IBM Plex Mono", font_size=10)
+                    pill_w = lbl.width + 0.20
+                    max_adj_label_width = max(max_adj_label_width, pill_w)
 
-        # Minimum interval between blocks = label width + clear margin on both sides (min 0.95)
-        required_gap = max(0.95, max_adj_label_width + 0.35)
-
-        # 3. Re-run layout to guarantee clear border-to-border gap with true widths
-        self.flow.auto_layout(mode="horizontal", gap=required_gap, min_label_gap=False)
+            required_gap = max(0.95, max_adj_label_width + 0.35)
+            self.flow.auto_layout(mode="horizontal", gap=required_gap, min_label_gap=False)
 
     def build_node_mobject(self, node: Node) -> Any:
         from manim import RoundedRectangle, Text, VGroup, DOWN
@@ -105,7 +103,7 @@ class ManimFlowRenderer:
         return node_group
 
     def build_edge_mobject(self, edge: Edge) -> Any:
-        from manim import Arrow, CurvedArrow, Text, VGroup, UP, RoundedRectangle
+        from manim import Arrow, CurvedArrow, Text, VGroup, UP, DOWN, LEFT, RIGHT, RoundedRectangle
 
         t = self.flow.theme
         src_mob = self.node_mobjects.get(edge.source_id)
@@ -119,81 +117,130 @@ class ManimFlowRenderer:
         dx = tgt_pos[0] - src_pos[0]
         dy = tgt_pos[1] - src_pos[1]
 
-        # Adjacent direct connection
-        if abs(dy) < 0.1 and abs(dx) < 3.5:
+        # Case 1: Pure horizontal adjacent
+        if abs(dy) < 0.2 and abs(dx) < 3.8:
+            start_p = src_mob.rect.get_right() if dx > 0 else src_mob.rect.get_left()
+            end_p = tgt_mob.rect.get_left() if dx > 0 else tgt_mob.rect.get_right()
             arrow = Arrow(
-                src_mob.rect.get_right(),
-                tgt_mob.rect.get_left(),
+                start_p,
+                end_p,
                 buff=0.08,
                 stroke_width=2.5,
                 max_tip_length_to_length_ratio=0.22,
                 color=t.border_color,
             )
-            if edge.label:
-                lbl_txt = Text(
-                    edge.label,
-                    font="IBM Plex Mono",
-                    font_size=10,
-                    color=t.text_muted,
-                )
-                pill = RoundedRectangle(
-                    corner_radius=0.06,
-                    width=lbl_txt.width + 0.18,
-                    height=lbl_txt.height + 0.10,
-                    fill_color=t.bg_color,
-                    fill_opacity=0.95,
-                    stroke_color=t.border_color,
-                    stroke_width=1.0,
-                ).next_to(arrow, UP, buff=0.10)
-                lbl_txt.move_to(pill.get_center())
-                lbl_group = VGroup(pill, lbl_txt)
+            return self._wrap_edge_label(arrow, edge.label, t, UP, 0.10)
 
-                group = VGroup(arrow, lbl_group)
-                group.arrow = arrow
-                group.path = arrow
-                group.label = lbl_group
-                return group
+        # Case 2: Pure vertical connection
+        if abs(dx) < 0.2:
+            start_p = src_mob.rect.get_bottom() if dy < 0 else src_mob.rect.get_top()
+            end_p = tgt_mob.rect.get_top() if dy < 0 else tgt_mob.rect.get_bottom()
+            arrow = Arrow(
+                start_p,
+                end_p,
+                buff=0.08,
+                stroke_width=2.5,
+                max_tip_length_to_length_ratio=0.22,
+                color=t.border_color,
+            )
+            return self._wrap_edge_label(arrow, edge.label, t, RIGHT, 0.10)
 
+        # Case 3: Horizontal jump over intermediate node (e.g. Gateway -> LLM)
+        if abs(dy) < 0.2 and abs(dx) >= 3.8:
+            start_pt = src_mob.rect.get_top()
+            end_pt = tgt_mob.rect.get_top()
+            arrow = CurvedArrow(
+                start_pt,
+                end_pt,
+                angle=-0.80,
+                color=t.accent_color,
+                stroke_width=2.5,
+            )
+            return self._wrap_edge_label(arrow, edge.label, t, UP, 0.12, is_accent=True, use_proportion=True)
+
+        # Case 4: Diagonal / Branch connection (e.g., Orchestrator -> Code / Search)
+        import numpy as np
+
+        start_p = src_mob.rect.get_right() if dx > 0 else src_mob.rect.get_left()
+        end_p = tgt_mob.rect.get_left() if dx > 0 else tgt_mob.rect.get_right()
+
+        arrow = Arrow(
+            start_p,
+            end_p,
+            buff=0.08,
+            stroke_width=2.5,
+            max_tip_length_to_length_ratio=0.22,
+            color=t.border_color,
+        )
+
+        # Compute normal vector to arrow direction for label offset
+        vec = np.array([end_p[0] - start_p[0], end_p[1] - start_p[1], 0.0])
+        norm = np.linalg.norm(vec)
+        if norm > 1e-4:
+            unit_vec = vec / norm
+            # Normal vector pointing outward (+Y if going right & up, -Y if going right & down)
+            if dy > 0:
+                perp = np.array([-unit_vec[1], unit_vec[0], 0.0])
+                if perp[1] < 0:
+                    perp = -perp
+            else:
+                perp = np.array([unit_vec[1], -unit_vec[0], 0.0])
+                if perp[1] > 0:
+                    perp = -perp
+        else:
+            perp = np.array([0.0, 1.0, 0.0])
+
+        return self._wrap_edge_label(arrow, edge.label, t, perp, 0.18, use_proportion=True)
+
+
+    def _wrap_edge_label(
+        self,
+        arrow: Any,
+        label_text: Optional[str],
+        theme: Any,
+        direction: Any,
+        buff: float,
+        is_accent: bool = False,
+        use_proportion: bool = False,
+    ) -> Any:
+        from manim import Text, VGroup, RoundedRectangle
+
+        if not label_text:
             arrow.path = arrow
             return arrow
 
-        # Multi-node jump: curved arch
-        start_pt = src_mob.rect.get_top()
-        end_pt = tgt_mob.rect.get_top()
-        arrow = CurvedArrow(
-            start_pt,
-            end_pt,
-            angle=-0.80,
-            color=t.accent_color,
-            stroke_width=2.5,
+        color = theme.accent_color if is_accent else theme.text_muted
+        border_col = theme.accent_color if is_accent else theme.border_color
+
+        lbl_txt = Text(
+            label_text,
+            font="IBM Plex Mono",
+            font_size=10,
+            color=color,
         )
-        if edge.label:
-            lbl_txt = Text(
-                edge.label,
-                font="IBM Plex Mono",
-                font_size=10,
-                color=t.accent_color,
-            )
-            pill = RoundedRectangle(
-                corner_radius=0.06,
-                width=lbl_txt.width + 0.18,
-                height=lbl_txt.height + 0.10,
-                fill_color=t.bg_color,
-                fill_opacity=0.95,
-                stroke_color=t.accent_color,
-                stroke_width=1.2,
-            ).next_to(arrow.point_from_proportion(0.5), UP, buff=0.12)
-            lbl_txt.move_to(pill.get_center())
-            lbl_group = VGroup(pill, lbl_txt)
+        pill = RoundedRectangle(
+            corner_radius=0.06,
+            width=lbl_txt.width + 0.18,
+            height=lbl_txt.height + 0.10,
+            fill_color=theme.bg_color,
+            fill_opacity=0.95,
+            stroke_color=border_col,
+            stroke_width=1.0 if not is_accent else 1.2,
+        )
 
-            group = VGroup(arrow, lbl_group)
-            group.arrow = arrow
-            group.path = arrow
-            group.label = lbl_group
-            return group
+        if use_proportion:
+            pill.move_to(arrow.point_from_proportion(0.50)).shift(direction * buff)
+        else:
+            pill.next_to(arrow, direction, buff=buff)
 
-        arrow.path = arrow
-        return arrow
+        lbl_txt.move_to(pill.get_center())
+        lbl_group = VGroup(pill, lbl_txt)
+
+        group = VGroup(arrow, lbl_group)
+        group.arrow = arrow
+        group.path = arrow
+        group.label = lbl_group
+        return group
 
     def play_on_scene(self, scene: Any) -> None:
         """Executes the timeline on a Manim Scene with visual feedback."""

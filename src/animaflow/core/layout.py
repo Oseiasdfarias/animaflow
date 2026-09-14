@@ -95,3 +95,29 @@ class LayoutEngine:
             current_y -= node.height + gap
 
         return gap
+
+    @staticmethod
+    def arrange_layers(
+        layers: List[List[Node]],
+        h_gap: float = 1.10,
+        v_gap: float = 0.90,
+    ) -> None:
+        """Arranges nodes in distinct horizontal stages/layers (DAG layout).
+        Each column represents a stage, centered along X and each column centered along Y.
+        """
+        if not layers:
+            return
+
+        num_layers = len(layers)
+        layer_max_widths = [max((node.width for node in layer), default=1.5) for layer in layers]
+        
+        # Calculate total width across layers with h_gap
+        total_width = sum(layer_max_widths) + (num_layers - 1) * h_gap
+        current_x = -total_width / 2.0
+
+        for layer, max_w in zip(layers, layer_max_widths):
+            center_x = current_x + (max_w / 2.0)
+            # Arrange nodes in this layer vertically
+            LayoutEngine.arrange_vertical(layer, gap=v_gap, x=center_x)
+            current_x += max_w + h_gap
+
