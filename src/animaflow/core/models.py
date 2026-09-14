@@ -22,6 +22,7 @@ class NodeStatus(str, Enum):
 @dataclass
 class Node:
     """Semantic representation of a flowchart node."""
+
     title: str
     subtitle: Optional[str] = None
     icon: Optional[str] = None
@@ -62,6 +63,7 @@ class EdgeStyle(str, Enum):
 @dataclass
 class Edge:
     """Directed connection between two nodes."""
+
     source_id: str
     target_id: str
     label: Optional[str] = None

@@ -5,6 +5,7 @@ from typing import Dict, Any
 @dataclass
 class Theme:
     """Visual theme settings for nodes, edges and canvas."""
+
     name: str = "DarkTerminal"
     bg_color: str = "#0E1015"
     surface_color: str = "#161920"

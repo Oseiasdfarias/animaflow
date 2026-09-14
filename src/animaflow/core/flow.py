@@ -62,7 +62,9 @@ class Flow:
         self.edges.append(edge)
         return edge
 
-    def auto_layout(self, mode: str = "horizontal", spacing: float = 2.2, offset: float = 0.0) -> "Flow":
+    def auto_layout(
+        self, mode: str = "horizontal", spacing: float = 2.2, offset: float = 0.0
+    ) -> "Flow":
         nodes_list = list(self.nodes.values())
         if mode == "horizontal":
             LayoutEngine.arrange_horizontal(nodes_list, spacing=spacing, y=offset)
@@ -73,12 +75,14 @@ class Flow:
     def render_manim(self, scene: Any) -> Any:
         """Helper to render this flow into an active Manim scene."""
         from ..backends.manim.renderer import ManimFlowRenderer
+
         renderer = ManimFlowRenderer(self)
         return renderer.play_on_scene(scene)
 
     def export_html(self, output_path: str) -> str:
         """Helper to export this flow to an interactive HTML Canvas/SVG file."""
         from ..backends.web.canvas import WebCanvasExporter
+
         return WebCanvasExporter.to_html(self, output_path)
 
     def to_dict(self) -> Dict[str, Any]:

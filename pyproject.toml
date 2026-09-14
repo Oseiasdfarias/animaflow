@@ -9,9 +9,7 @@ description = "Declarative, animated architecture flowcharts & diagrams for Pyth
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
-authors = [
-    { name = "Oséias Farias", email = "oseias.farias@gmail.com" }
-]
+authors = [{ name = "Oséias Farias", email = "oseias.farias@gmail.com" }]
 keywords = [
     "diagram",
     "flowchart",
@@ -22,7 +20,7 @@ keywords = [
     "architecture",
     "presentation",
     "linkedin",
-    "video"
+    "video",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -36,27 +34,13 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
 ]
-dependencies = [
-    "pydantic>=2.0.0",
-]
+dependencies = ["pydantic>=2.0.0"]
 
 [project.optional-dependencies]
-manim = [
-    "manim>=0.18.0",
-]
-web = [
-    "jinja2>=3.1.0",
-]
-all = [
-    "manim>=0.18.0",
-    "jinja2>=3.1.0",
-]
-dev = [
-    "pytest>=8.0.0",
-    "pytest-cov>=4.1.0",
-    "ruff>=0.4.0",
-    "mypy>=1.10.0",
-]
+manim = ["manim>=0.18.0"]
+web = ["jinja2>=3.1.0"]
+all = ["manim>=0.18.0", "jinja2>=3.1.0"]
+dev = ["pytest>=8.0.0", "pytest-cov>=4.1.0", "ruff>=0.4.0", "mypy>=1.10.0"]
 
 [project.urls]
 Homepage = "https://animaflow.io"

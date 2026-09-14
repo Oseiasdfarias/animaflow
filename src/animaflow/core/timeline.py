@@ -35,6 +35,7 @@ class TimelineAction:
 @dataclass
 class Timeline:
     """Sequence of animated actions describing the narrative."""
+
     actions: List[TimelineAction] = field(default_factory=list)
 
     def reveal_sequence(self, delay_per_item: float = 0.3) -> "Timeline":

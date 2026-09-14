@@ -86,3 +86,4 @@ flow.timeline.send_packet(from_node=app, to_node=llm)
 ## 📄 License
 
 MIT License © 2026 [Oséias Farias](https://github.com/Oseiasdfarias)
+
