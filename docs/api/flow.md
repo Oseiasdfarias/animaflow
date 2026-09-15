@@ -6,3 +6,4 @@ A classe `Flow` é o objeto central de qualquer diagrama no **animaflow**.
     options:
       show_root_heading: true
       show_source: true
+

@@ -53,3 +53,4 @@ flow.timeline.stream_packets(
 
 - **No Manim (Vídeo/GIF)**: Utiliza um grupo de `Dot`s vetoriais gerenciados por um `updater` único de alta performance. As partículas possuem opacidade modelada por curva senoidal: entram transparentes, atingem brilho máximo no meio do caminho e desaparecem suavemente ao atingir o nó de destino.
 - **Na Web (HTML Canvas/SVG)**: Spawna círculos SVG animados com CSS transitions e temporizadores em JavaScript puro, sem travar a thread principal da página.
+

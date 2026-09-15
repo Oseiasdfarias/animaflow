@@ -57,3 +57,4 @@ class EventDrivenPipelineAnimation(Scene):
 ```bash
 manim -qm examples/event_driven_pipeline.py EventDrivenPipelineAnimation
 ```
+

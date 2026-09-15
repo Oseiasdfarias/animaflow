@@ -76,3 +76,4 @@ with open("fluxo.html", "w", encoding="utf-8") as f:
 ```
 
 Abra o arquivo `fluxo.html` em qualquer navegador para interagir com o diagrama em tempo real!
+

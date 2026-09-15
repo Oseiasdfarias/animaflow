@@ -63,3 +63,4 @@ flow.timeline.stream_packets(count=5, speed=0.7, duration=3.0)
 # Realce visual de um nó específico
 flow.timeline.highlight_node(node)
 ```
+

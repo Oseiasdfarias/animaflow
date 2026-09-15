@@ -37,3 +37,4 @@ A identidade do **animaflow** foi concebida sob os princípios do design escandi
 ## 📐 Tipografia: IBM Plex Sans
 
 O logotipo utiliza a fonte **IBM Plex Sans SemiBold**, convertida matematicamente em curvas vetoriais (`fontTools`), garantindo consistência universal em qualquer sistema operacional ou dispositivo.
+

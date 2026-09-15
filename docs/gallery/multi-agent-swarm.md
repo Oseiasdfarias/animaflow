@@ -64,3 +64,4 @@ class AgentSwarmAnimation(Scene):
 ```bash
 manim -qm examples/multi_agent_swarm.py AgentSwarmAnimation
 ```
+

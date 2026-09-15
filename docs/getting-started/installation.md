@@ -67,3 +67,4 @@ print(f"animaflow instalado com sucesso! Nó criado: {node.name}")
 ```
 
 Se o comando executar sem erros, sua instalação está pronta para o [Primeiro Diagrama](quickstart.md)!
+

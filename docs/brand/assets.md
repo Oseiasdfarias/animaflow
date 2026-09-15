@@ -38,3 +38,4 @@ Se você modificar alguma constante ou proporção do símbolo, basta rodar o sc
 ```bash
 python brand/scripts/gen_brand.py
 ```
+

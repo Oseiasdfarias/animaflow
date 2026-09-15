@@ -58,3 +58,4 @@ flow.auto_layout_layers(
 | `layers` | `List[List[Node]]` | *obrigatório* | Lista de colunas, onde cada coluna contém um ou mais nós |
 | `h_gap` | `float` | `1.5` | Distância mínima horizontal entre a borda mais externa de uma coluna e a próxima |
 | `v_gap` | `float` | `0.8` | Distância mínima vertical entre nós adjacentes na mesma coluna |
+

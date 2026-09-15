@@ -48,3 +48,4 @@ flow.connect(
     label="process_batch_events(chunk_size=5000, compression='gzip')"
 )
 ```
+

@@ -55,3 +55,4 @@ manim -qm -i meu_script.py MinhaCenaAnimada
 - **Hierarquia Tipográfica**: O título do nó é exibido em peso SemiBold e o subtítulo é estilizado como uma badge de metadados técnicos.
 - **Roteamento Curvado**: As setas de conexão utilizam vetores suavizados e evitam sobreposição com rótulos e caixas.
 - **Animações em 60fps**: Updaters otimizados para streams de partículas garantem renderização fluida sem queda de frames.
+

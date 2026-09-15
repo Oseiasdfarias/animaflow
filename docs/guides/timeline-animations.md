@@ -46,3 +46,4 @@ Insere uma pausa na animação para permitir a leitura de legendas ou visualiza�
 ```python
 flow.timeline.wait(1.5)
 ```
+

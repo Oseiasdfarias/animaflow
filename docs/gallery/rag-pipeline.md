@@ -57,3 +57,4 @@ class RAGFlowAnimation(Scene):
 ```bash
 manim -qm examples/rag_pipeline_manim.py RAGFlowAnimation
 ```
+

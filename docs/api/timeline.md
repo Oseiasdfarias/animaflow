@@ -6,3 +6,4 @@ O motor de orquestração temporal de animações, pacotes e streams de partícu
     options:
       show_root_heading: true
       show_source: true
+

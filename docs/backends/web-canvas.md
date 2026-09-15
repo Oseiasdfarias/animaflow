@@ -39,3 +39,4 @@ O HTML gerado pode ser embutido como um `<iframe>` em documentações MkDocs, No
 ```html
 <iframe src="dashboard_arquitetura.html" width="100%" height="600" frameborder="0"></iframe>
 ```
+
