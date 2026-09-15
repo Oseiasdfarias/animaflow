@@ -4,7 +4,7 @@ Este caso de uso demonstra uma arquitetura moderna orientada a eventos (*Event-D
 
 ---
 
-## 📸 Demonstração Visual
+## :material-image-outline: Demonstração Visual
 
 <p align="center">
   <img src="../../assets/event_driven_pipeline_stream.gif" width="750" alt="Event-Driven Pipeline Stream">
@@ -12,7 +12,7 @@ Este caso de uso demonstra uma arquitetura moderna orientada a eventos (*Event-D
 
 ---
 
-## 💻 Código Completo
+## :material-code-tags: Código Completo
 
 Disponível em [`examples/event_driven_pipeline.py`](https://github.com/Oseiasdfarias/animaflow/blob/main/examples/event_driven_pipeline.py):
 
@@ -52,7 +52,7 @@ class EventDrivenPipelineAnimation(Scene):
 
 ---
 
-## 🚀 Como Executar
+## :material-play-outline: Como Executar
 
 ```bash
 manim -qm examples/event_driven_pipeline.py EventDrivenPipelineAnimation

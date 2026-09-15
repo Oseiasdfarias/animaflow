@@ -4,7 +4,7 @@ Este guia detalha como modelar entidades, conexões e legendas no **animaflow**.
 
 ---
 
-## 🏗️ Adicionando Nós (`add_node`)
+## :material-vector-rectangle: Adicionando Nós (`add_node`)
 
 O método `flow.add_node()` registra uma nova entidade no diagrama:
 
@@ -26,7 +26,7 @@ db = flow.add_node("Users DB", subtitle="PostgreSQL")
 
 ---
 
-## 🔗 Conectando Nós (`connect`)
+## :material-vector-line: Conectando Nós (`connect`)
 
 Conecte dois nós passando os objetos retornados por `add_node` ou seus respectivos `id`s:
 

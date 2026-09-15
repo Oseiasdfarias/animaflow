@@ -10,7 +10,7 @@
   </div>
 </div>
 
-## 📸 Demonstração em Tempo Real
+## :material-view-carousel: Demonstração em Tempo Real
 
 Veja abaixo exemplos de diagramas construídos declarativamente e renderizados em vídeo e SVG interativo:
 
@@ -21,7 +21,7 @@ Veja abaixo exemplos de diagramas construídos declarativamente e renderizados e
 
 ---
 
-## ⚡ Por que usar o animaflow?
+## :material-lightning-bolt: Por que usar o animaflow?
 
 Desenvolver animações de arquitetura de software para **LinkedIn, YouTube, talks técnicas e documentação corporativa** historicamente exigia uma escolha dolorosa:
 
@@ -40,7 +40,7 @@ flowchart LR
 
 ---
 
-## 🚀 Exemplo Rápido: Declarando um Pipeline com Stream
+## :material-play-circle-outline: Exemplo Rápido: Declarando um Pipeline com Stream
 
 ```python
 from manim import Scene
@@ -76,7 +76,7 @@ class EventFlowScene(Scene):
 
 ---
 
-## 🗺️ Navegação Rápida
+## :material-compass-outline: Navegação Rápida
 
 <div class="grid cards" markdown>
 

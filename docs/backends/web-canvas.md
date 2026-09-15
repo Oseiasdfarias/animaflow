@@ -4,7 +4,7 @@ O renderizador **Web Canvas** (`backends.web.canvas`) transforma seu diagrama em
 
 ---
 
-## 🌐 Gerando o HTML
+## :material-code-tags: Gerando o HTML
 
 Você pode exportar a string HTML completa diretamente pelo objeto `Flow`:
 
@@ -23,7 +23,7 @@ with open("dashboard_arquitetura.html", "w", encoding="utf-8") as f:
 
 ---
 
-## ✨ Recursos da Visualização Web
+## :material-star-outline: Recursos da Visualização Web
 
 1. **Zero Dependências Externas**: Não requer Node.js, React ou bibliotecas pesadas de terceiros; roda direto no browser com JavaScript vanilla.
 2. **Vetores Nativos SVG**: Escala infinitamente para qualquer resolução ou tela sem perder nitidez ou gerar artefatos de compressão.
@@ -32,7 +32,7 @@ with open("dashboard_arquitetura.html", "w", encoding="utf-8") as f:
 
 ---
 
-## 📦 Incorporando em Documentações e Dashboards
+## :material-application-brackets-outline: Incorporando em Documentações e Dashboards
 
 O HTML gerado pode ser embutido como um `<iframe>` em documentações MkDocs, Notion, Confluence ou ferramentas internas de engenharia:
 

@@ -4,7 +4,7 @@ O **animaflow** pode ser instalado de forma modular dependendo do caso de uso e 
 
 ---
 
-## 📦 Instalação via pip
+## :material-package-variant-closed: Instalação via pip
 
 ### 1. Pacote Básico (Core + Web Canvas)
 Para criar fluxos, rodar layouts e exportar visualizações interativas em HTML/SVG independente:
@@ -29,7 +29,7 @@ pip install "animaflow[all]"
 
 ---
 
-## ⚙️ Dependências de Sistema
+## :material-cog-outline: Dependências de Sistema
 
 ### FFmpeg (Obrigatório para o Manim)
 Para compilar vídeos e extrair GIFs através do Manim Community Edition, o binário do `ffmpeg` precisa estar presente no seu `PATH`:
@@ -54,7 +54,7 @@ Para compilar vídeos e extrair GIFs através do Manim Community Edition, o bin�
 
 ---
 
-## 🧪 Verificando a Instalação
+## :material-test-tube: Verificando a Instalação
 
 Abra um terminal interativo Python e execute:
 

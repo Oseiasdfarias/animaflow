@@ -26,21 +26,21 @@
 </p>
 
 <p align="center">
-  <a href="#-por-que-o-animaflow">Por que o animaflow?</a> ·
-  <a href="#-galeria--exemplos">Galeria & Exemplos</a> ·
-  <a href="#-como-funciona-a-arquitetura">Arquitetura</a> ·
-  <a href="#-instalação">Instalação</a> ·
-  <a href="#-começando-rápido">Começando Rápido</a> ·
-  <a href="#-exemplos-prontos">Exemplos Prontos</a> ·
-  <a href="#-identidade-visual">Identidade Visual</a> ·
-  <a href="#-estrutura-do-repositório">Estrutura</a> ·
-  <a href="#-roadmap-e-próximos-passos">Roadmap</a> ·
-  <a href="#-autoria--licença">Autoria & Licença</a>
+  <a href="#por-que-o-animaflow">Por que o animaflow?</a> ·
+  <a href="#galeria--exemplos">Galeria & Exemplos</a> ·
+  <a href="#como-funciona-a-arquitetura">Arquitetura</a> ·
+  <a href="#instalacao">Instalação</a> ·
+  <a href="#comecando-rapido">Começando Rápido</a> ·
+  <a href="#exemplos-prontos">Exemplos Prontos</a> ·
+  <a href="#identidade-visual">Identidade Visual</a> ·
+  <a href="#estrutura-do-repositorio">Estrutura</a> ·
+  <a href="#roadmap-e-proximos-passos">Roadmap</a> ·
+  <a href="#autoria--licenca">Autoria & Licença</a>
 </p>
 
 ---
 
-## 📸 Galeria & Exemplos
+## Galeria & Exemplos
 
 <table>
   <tr>
@@ -57,7 +57,7 @@
 
 ---
 
-## 🚀 Por que o animaflow?
+## Por que o animaflow?
 
 Criar diagramas de arquitetura de software para **redes profissionais (LinkedIn, X/Twitter)**, **vídeos técnicos (YouTube, Reels)** e **apresentações corporativas** geralmente exige:
 - Escrever centenas de linhas manuais de geometria, coordenadas absolutas e updaters no Manim ou After Effects, **ou**
@@ -71,7 +71,7 @@ O **animaflow** resolve isso separando a **definição semântica do fluxo** dos
 
 ---
 
-## 🏛️ Como funciona a arquitetura
+## Como funciona a arquitetura
 
 O núcleo do **animaflow** é modular e extensível:
 
@@ -85,7 +85,7 @@ O núcleo do **animaflow** é modular e extensível:
 
 ---
 
-## 📦 Instalação
+## Instalação
 
 ```bash
 # Instalação básica (Core + Web Canvas export)
@@ -102,7 +102,7 @@ pip install "animaflow[all]"
 
 ---
 
-## ⚡ Começando Rápido
+## Começando Rápido
 
 ### 1. Criando um fluxo com animação contínua (Stream de Partículas)
 
@@ -150,7 +150,7 @@ with open("arquitetura.html", "w", encoding="utf-8") as f:
 
 ---
 
-## 📂 Exemplos Prontos
+## Exemplos Prontos
 
 O repositório inclui exemplos completos na pasta [`examples/`](./examples/):
 
@@ -163,7 +163,7 @@ O repositório inclui exemplos completos na pasta [`examples/`](./examples/):
 
 ---
 
-## 🎨 Identidade Visual (Nordic Sage & Carbon)
+## Identidade Visual (Nordic Sage & Carbon)
 
 A identidade visual do **animaflow** foi concebida com princípios de design editorial nórdico e precisão industrial, evitando gradientes genéricos e priorizando contraste técnico:
 
@@ -177,7 +177,7 @@ A identidade visual do **animaflow** foi concebida com princípios de design edi
 
 ---
 
-## 📁 Estrutura do Repositório
+## Estrutura do Repositório
 
 ```
 animaflow/
@@ -206,7 +206,7 @@ animaflow/
 
 ---
 
-## 🗺️ Roadmap e Próximos Passos
+## Roadmap e Próximos Passos
 
 Para uma visão detalhada do que já foi construído e das próximas entregas, consulte o documento [docs/IMPLEMENTATION_OVERVIEW.md](./docs/IMPLEMENTATION_OVERVIEW.md).
 
@@ -224,7 +224,7 @@ Para uma visão detalhada do que já foi construído e das próximas entregas, c
 
 ---
 
-## 👨‍💻 Autoria & Licença
+## Autoria & Licença
 
 Desenvolvido por **[Oséias Farias](https://github.com/Oseiasdfarias)**.
 

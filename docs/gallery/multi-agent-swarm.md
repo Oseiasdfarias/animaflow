@@ -4,7 +4,7 @@ Este caso de uso demonstra uma rede de múltiplos agentes inteligentes de IA org
 
 ---
 
-## 📸 Demonstração Visual
+## :material-image-outline: Demonstração Visual
 
 <p align="center">
   <img src="../../assets/multi_agent_swarm.png" width="750" alt="Multi-Agent Swarm Orchestration">
@@ -12,7 +12,7 @@ Este caso de uso demonstra uma rede de múltiplos agentes inteligentes de IA org
 
 ---
 
-## 💻 Código Completo
+## :material-code-tags: Código Completo
 
 Disponível em [`examples/multi_agent_swarm.py`](https://github.com/Oseiasdfarias/animaflow/blob/main/examples/multi_agent_swarm.py):
 
@@ -59,7 +59,7 @@ class AgentSwarmAnimation(Scene):
 
 ---
 
-## 🚀 Como Executar
+## :material-play-outline: Como Executar
 
 ```bash
 manim -qm examples/multi_agent_swarm.py AgentSwarmAnimation

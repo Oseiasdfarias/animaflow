@@ -4,7 +4,7 @@ A identidade do **animaflow** foi concebida sob os princípios do design escandi
 
 ---
 
-## 🏔️ A Filosofia do Símbolo
+## :material-shape-outline: A Filosofia do Símbolo
 
 <p align="center">
   <img width="160" src="../brand/png/icone-512.png" alt="Símbolo Oficial animaflow">
@@ -16,7 +16,7 @@ A identidade do **animaflow** foi concebida sob os princípios do design escandi
 
 ---
 
-## 🎨 A Paleta Oficial: Nordic Sage & Carbon
+## :material-palette: A Paleta Oficial: Nordic Sage & Carbon
 
 <p align="center">
   <img src="../brand/png/banner-hero-1280.png" width="800" alt="Banner Oficial animaflow">
@@ -34,7 +34,7 @@ A identidade do **animaflow** foi concebida sob os princípios do design escandi
 
 ---
 
-## 📐 Tipografia: IBM Plex Sans
+## :material-format-font: Tipografia: IBM Plex Sans
 
 O logotipo utiliza a fonte **IBM Plex Sans SemiBold**, convertida matematicamente em curvas vetoriais (`fontTools`), garantindo consistência universal em qualquer sistema operacional ou dispositivo.
 

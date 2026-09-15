@@ -4,7 +4,7 @@ Demonstração de uma arquitetura completa de Recuperação Aumentada por Geraç
 
 ---
 
-## 📸 Demonstração Visual
+## :material-image-outline: Demonstração Visual
 
 <p align="center">
   <img src="../../assets/rag_pipeline.png" width="750" alt="RAG Architecture">
@@ -12,7 +12,7 @@ Demonstração de uma arquitetura completa de Recuperação Aumentada por Geraç
 
 ---
 
-## 💻 Código de Demonstração
+## :material-code-tags: Código de Demonstração
 
 Disponível em [`examples/rag_pipeline_manim.py`](https://github.com/Oseiasdfarias/animaflow/blob/main/examples/rag_pipeline_manim.py):
 
@@ -52,7 +52,7 @@ class RAGFlowAnimation(Scene):
 
 ---
 
-## 🚀 Como Executar
+## :material-play-outline: Como Executar
 
 ```bash
 manim -qm examples/rag_pipeline_manim.py RAGFlowAnimation

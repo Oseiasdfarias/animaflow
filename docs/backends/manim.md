@@ -4,7 +4,7 @@ O renderizador **Manim CE** (`backends.manim.renderer`) é o motor principal par
 
 ---
 
-## 🎬 Como Usar em uma Cena Manim
+## :material-movie-play-outline: Como Usar em uma Cena Manim
 
 Basta instanciar uma classe que herda de `Scene` do Manim e invocar `flow.render_manim(self)`:
 
@@ -29,7 +29,7 @@ class MinhaCenaAnimada(Scene):
 
 ---
 
-## 🚀 Comandos de Linha de Comando Manim
+## :material-console: Comandos de Linha de Comando Manim
 
 Para renderizar seus scripts, utilize os parâmetros padrão da CLI do Manim:
 
@@ -49,7 +49,7 @@ manim -qm -i meu_script.py MinhaCenaAnimada
 
 ---
 
-## 💎 Características Visuais do Renderer
+## :material-palette-outline: Características Visuais do Renderer
 
 - **Mobjects Refinados**: Cartões com cantos arredondados, bordas de destaque e preenchimento escuro de alta legibilidade.
 - **Hierarquia Tipográfica**: O título do nó é exibido em peso SemiBold e o subtítulo é estilizado como uma badge de metadados técnicos.

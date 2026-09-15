@@ -1,6 +1,6 @@
 # Implementação da Biblioteca **animaflow**
 
-## ✅ Funcionalidades já implementadas
+## :material-check-circle-outline: Funcionalidades já implementadas
 
 | Área | Descrição | Arquivo(s) principais |
 |------|-----------|-----------------------|
@@ -11,7 +11,7 @@
 | **Testes** | Testes unitários básicos que cobrem criação de fluxo e exportação | `tests/` |
 | **Mídia gerada** | GIF e MP4 demonstrando a nova animação | `media/event_driven_pipeline_stream.gif`, `media/videos/event_driven_pipeline/.../EventDrivenPipelineAnimation.mp4` |
 
-## ⚠️ Gaps / Oportunidades de expansão
+## :material-alert-circle-outline: Gaps / Oportunidades de expansão
 
 | Tema | O que ainda falta | Onde observar / TODO |
 |------|-------------------|----------------------|
@@ -26,7 +26,7 @@
 | **Exportação avançada** | PlantUML, GraphViz DOT, PDF direto | Backends atuais só geram MP4/GIF/HTML |
 | **Animações adicionais** | `HIGHLIGHT_PATH`, `FADE_IN_NODE`, transições de estado | `renderer.py` pode ser estendido com novos `ActionType` |
 
-## 🚀 Próximos passos (roadmap)
+## :material-road-variant: Próximos passos (roadmap)
 
 ### Curto prazo (1‑2 semanas)
 - **Limpar enum**: remover ou implementar `TRANSITION_NODE`.

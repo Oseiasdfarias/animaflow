@@ -4,7 +4,7 @@ Um dos recursos mais poderosos do **animaflow** é o layout em camadas (`auto_la
 
 ---
 
-## 📐 Como Funciona o Algoritmo
+## :material-ruler-square: Como Funciona o Algoritmo
 
 O método `flow.auto_layout_layers()` organiza o diagrama em colunas de estágios lógicos:
 
@@ -32,7 +32,7 @@ flowchart LR
 
 ---
 
-## 💻 Exemplo de Uso
+## :material-code-tags: Exemplo de Uso
 
 ```python
 # Definindo as camadas como listas de nós
@@ -51,7 +51,7 @@ flow.auto_layout_layers(
 
 ---
 
-## ⚙️ Parâmetros do `auto_layout_layers`
+## :material-tune-variant: Parâmetros do `auto_layout_layers``auto_layout_layers`
 
 | Parâmetro | Tipo | Padrão | Descrição |
 | --- | --- | --- | --- |

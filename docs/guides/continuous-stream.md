@@ -6,7 +6,7 @@ Em vez de enviar apenas uma bolinha isolada, o `stream_packets` gera uma série 
 
 ---
 
-## 🌊 Sintaxe Básica
+## :material-waves: Sintaxe Básica
 
 ```python
 # Dispara um fluxo contínuo de partículas em todas as arestas
@@ -19,7 +19,7 @@ flow.timeline.stream_packets(
 
 ---
 
-## 🎯 Direcionando para Arestas Específicas
+## :material-crosshairs-gps: Direcionando para Arestas Específicas
 
 Você também pode ativar o streaming em apenas uma conexão específica entre dois serviços de interesse:
 
@@ -36,7 +36,7 @@ flow.timeline.stream_packets(
 
 ---
 
-## ⚙️ Parâmetros Detalhados
+## :material-tune-variant: Parâmetros Detalhados
 
 | Parâmetro | Tipo | Padrão | Descrição |
 | --- | --- | --- | --- |
@@ -49,7 +49,7 @@ flow.timeline.stream_packets(
 
 ---
 
-## 🎥 Efeito Visual nos Renderizadores
+## :material-eye-outline: Efeito Visual nos Renderizadores
 
 - **No Manim (Vídeo/GIF)**: Utiliza um grupo de `Dot`s vetoriais gerenciados por um `updater` único de alta performance. As partículas possuem opacidade modelada por curva senoidal: entram transparentes, atingem brilho máximo no meio do caminho e desaparecem suavemente ao atingir o nó de destino.
 - **Na Web (HTML Canvas/SVG)**: Spawna círculos SVG animados com CSS transitions e temporizadores em JavaScript puro, sem travar a thread principal da página.

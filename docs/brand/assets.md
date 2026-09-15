@@ -4,7 +4,7 @@ Todos os arquivos vetoriais e rasterizados de alta resolução da marca **animaf
 
 ---
 
-## 📦 Variantes Disponíveis
+## :material-folder-multiple-image: Variantes Disponíveis
 
 ### 1. Arquivos Vetoriais SVG (`brand/svg/`)
 
@@ -31,7 +31,7 @@ Rasterizados nativamente via PyCairo com antialiasing subpixel:
 
 ---
 
-## ⚡ Como Regenerar Automaticamente
+## :material-refresh: Como Regenerar Automaticamente
 
 Se você modificar alguma constante ou proporção do símbolo, basta rodar o script gerador:
 

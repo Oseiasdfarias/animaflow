@@ -4,7 +4,7 @@ A classe `Timeline` permite encadear eventos em ordem sequencial para contar a h
 
 ---
 
-## 🎬 Métodos da Linha do Tempo
+## :material-movie-open-outline: Métodos da Linha do Tempo
 
 ### 1. `reveal_sequence`
 Faz os nós do sistema aparecerem na tela de forma gradual e elegante:

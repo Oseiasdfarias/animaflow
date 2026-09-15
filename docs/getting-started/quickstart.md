@@ -4,7 +4,7 @@ Neste tutorial rápido, você vai criar do zero um diagrama animado de microsser
 
 ---
 
-## 🛠️ Passo 1: O Script Python
+## :material-file-code-outline: Passo 1: O Script Python
 
 Crie um arquivo chamado `meu_primeiro_fluxo.py`:
 
@@ -49,7 +49,7 @@ class PrimeiroFluxoAnimado(Scene):
 
 ---
 
-## 🎥 Passo 2: Executando a Renderização
+## :material-video-outline: Passo 2: Executando a Renderização
 
 Para renderizar o vídeo em qualidade média (720p) ou alta (1080p), utilize a CLI do Manim:
 
@@ -65,7 +65,7 @@ O vídeo gerado estará disponível na pasta `media/videos/meu_primeiro_fluxo/`.
 
 ---
 
-## 🌐 Alternativa: Exportando para Web (HTML)
+## :material-web: Alternativa: Exportando para Web (HTML)
 
 Se preferir exportar uma página web interativa independente sem precisar do Manim ou do ffmpeg:
 
