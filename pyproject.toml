@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "animaflow"
-version = "0.1.0"
-description = "Declarative, animated architecture flowcharts & diagrams for Python (Manim, Web/Canvas, Remotion)."
+version = "0.1.1"
+description = "Python library for declarative animated architecture diagrams with HTML/SVG and Manim renderers."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
@@ -15,7 +15,7 @@ keywords = [
     "flowchart",
     "animation",
     "manim",
-    "remotion",
+    "svg",
     "canvas",
     "architecture",
     "presentation",
