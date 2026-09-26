@@ -1,41 +1,14 @@
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./brand/png/logo-horizontal-800.png">
-    <img height="110" src="./brand/png/logo-horizontal-solido-800.png" alt="animaflow">
-  </picture>
-</p>
+![animaflow](https://raw.githubusercontent.com/Oseiasdfarias/animaflow/main/brand/png/logo-horizontal-solido-800.png)
 
 <p align="center">
   <strong>Diagramas e fluxogramas de arquitetura declarativos, animados e programáveis em Python</strong><br>
-  <sub>Projete fluxos técnicos modernos uma única vez e renderize para Manim (MP4, GIF), Web Canvas/SVG interativo ou Remotion</sub>
+  <sub>Modele fluxos uma vez e exporte para HTML/SVG interativo ou animações com Manim</sub>
 </p>
 
 <p align="center">
-  <a href="https://oseiasdfarias.github.io/animaflow/"><img alt="Documentação Online" src="https://img.shields.io/badge/docs-online-1A2024?style=for-the-badge&logo=materialformkdocs&logoColor=9EC8B9"/></a>
-  <a href="https://github.com/Oseiasdfarias/animaflow/actions/workflows/publish.yml"><img alt="Publicação PyPI" src="https://img.shields.io/github/actions/workflow/status/Oseiasdfarias/animaflow/publish.yml?branch=main&style=for-the-badge&label=publish&logo=githubactions&logoColor=white"/></a>
-  <a href="https://pypi.org/project/animaflow/"><img alt="PyPI version" src="https://img.shields.io/pypi/v/animaflow?style=for-the-badge&logo=pypi&logoColor=white"/></a>
-  <a href="https://opensource.org/licenses/MIT"><img alt="License MIT" src="https://img.shields.io/badge/license-MIT-1A2024?style=for-the-badge&logoColor=white"/></a>
-  <a href="https://github.com/Oseiasdfarias/animaflow"><img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10+-121619?style=for-the-badge&logo=python&logoColor=9EC8B9"/></a>
-</p>
-
-<p align="center">
-  <img alt="Manim" src="https://img.shields.io/badge/Manim%20CE-Community-1A2024?style=for-the-badge&logoColor=white"/>
-  <img alt="SVG" src="https://img.shields.io/badge/SVG-HTML5-5C9E89?style=for-the-badge&logo=html5&logoColor=white"/>
-  <img alt="TypeScript / Web" src="https://img.shields.io/badge/Web%20Canvas-JavaScript-121619?style=for-the-badge&logo=javascript&logoColor=9EC8B9"/>
-  <img alt="Git" src="https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white"/>
-</p>
-
-<p align="center">
-  <a href="#por-que-o-animaflow">Por que o animaflow?</a> ·
-  <a href="#galeria--exemplos">Galeria & Exemplos</a> ·
-  <a href="#como-funciona-a-arquitetura">Arquitetura</a> ·
-  <a href="#instalacao">Instalação</a> ·
-  <a href="#comecando-rapido">Começando Rápido</a> ·
-  <a href="#exemplos-prontos">Exemplos Prontos</a> ·
-  <a href="#identidade-visual">Identidade Visual</a> ·
-  <a href="#estrutura-do-repositorio">Estrutura</a> ·
-  <a href="#roadmap-e-proximos-passos">Roadmap</a> ·
-  <a href="#autoria--licenca">Autoria & Licença</a>
+  <a href="https://pypi.org/project/animaflow/"><img alt="PyPI version" src="https://img.shields.io/pypi/v/animaflow"/></a>
+  <a href="https://pypi.org/project/animaflow/"><img alt="Python versions" src="https://img.shields.io/pypi/pyversions/animaflow"/></a>
+  <a href="https://github.com/Oseiasdfarias/animaflow/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-green.svg"/></a>
 </p>
 
 ---
@@ -44,9 +17,9 @@
 
 <table>
   <tr>
-    <td width="33%"><img src="./docs/assets/event_driven_pipeline_stream.gif" alt="Event-Driven Pipeline com Continuous Stream"></td>
-    <td width="33%"><img src="./docs/assets/multi_agent_swarm.png" alt="Multi-Agent Swarm Orchestration"></td>
-    <td width="33%"><img src="./docs/assets/rag_pipeline.png" alt="RAG Retrieval Pipeline"></td>
+    <td width="33%"><img src="https://raw.githubusercontent.com/Oseiasdfarias/animaflow/main/docs/assets/event_driven_pipeline_stream.gif" alt="Event-Driven Pipeline com Continuous Stream"></td>
+    <td width="33%"><img src="https://raw.githubusercontent.com/Oseiasdfarias/animaflow/main/docs/assets/multi_agent_swarm.png" alt="Multi-Agent Swarm Orchestration"></td>
+    <td width="33%"><img src="https://raw.githubusercontent.com/Oseiasdfarias/animaflow/main/docs/assets/rag_pipeline.png" alt="RAG Retrieval Pipeline"></td>
   </tr>
   <tr>
     <td align="center"><sub><b>Streaming Contínuo</b> — fluxo em tempo real de partículas</sub></td>
@@ -88,160 +61,49 @@ O núcleo do **animaflow** é modular e extensível:
 ## Instalação
 
 ```bash
-# Instalação básica (Core + exportação Web Canvas)
 pip install animaflow
-
-# Core com todos os renderizadores opcionais, incluindo Manim (MP4 / GIF)
-pip install "animaflow[all]"
-
-# Ferramentas de teste, lint, tipos e publicação
-pip install -e ".[dev]"
 ```
 
-> **Nota:** Para renderização via Manim, é necessário ter o `ffmpeg` instalado no seu sistema operacional.
+Para renderizar animações com Manim:
 
-## Publicar uma versão
+```bash
+pip install "animaflow[manim]"
+```
 
-O workflow [`publish.yml`](./.github/workflows/publish.yml) testa em Python 3.10–3.12 e valida o wheel e o sdist. Para publicar no PyPI, crie uma GitHub Release com a tag `vX.Y.Z`; a tag deve corresponder às versões em `pyproject.toml` e `src/animaflow/__init__.py`. Para testar, execute o workflow manualmente com o destino `testpypi`.
+A renderização de vídeo com Manim também requer FFmpeg instalado no sistema.
 
-Antes da primeira publicação, cadastre um **pending publisher** em cada índice:
-
-| Campo | PyPI | TestPyPI |
-| --- | --- | --- |
-| Project name | `animaflow` | `animaflow` |
-| Owner | `Oseiasdfarias` | `Oseiasdfarias` |
-| Repository | `animaflow` | `animaflow` |
-| Workflow filename | `publish.yml` | `publish.yml` |
-| Environment | `pypi` | `testpypi` |
-
-No PyPI, configure o pending publisher em [Publishing](https://pypi.org/manage/account/publishing/); no TestPyPI, use [Publishing](https://test.pypi.org/manage/account/publishing/). Os environments `pypi` e `testpypi` do GitHub já estão criados. O OIDC não usa tokens ou secrets do PyPI.
-
----
-
-## Começando Rápido
-
-### 1. Criando um fluxo com animação contínua (Stream de Partículas)
+## Exemplo rápido
 
 ```python
-from manim import Scene
 import animaflow as af
 
-class MyArchitectureScene(Scene):
-    def construct(self):
-        # 1. Cria o fluxo de arquitetura
-        flow = af.Flow(title="Real-Time Event Processing")
+flow = af.Flow(title="Pipeline de pedidos")
+api = flow.add_node("API", subtitle="Recebe pedidos")
+worker = flow.add_node("Worker", subtitle="Processa eventos")
+database = flow.add_node("Database", subtitle="Armazena resultados")
 
-        # 2. Declara os nós do sistema
-        client = flow.add_node("Mobile / IoT", subtitle="MQTT Producer")
-        broker = flow.add_node("Event Bus", subtitle="Kafka Cluster")
-        worker = flow.add_node("Stream Worker", subtitle="Flink / Python")
-        store  = flow.add_node("Data Lake", subtitle="ClickHouse")
-
-        # 3. Organiza o layout em camadas automáticas
-        flow.auto_layout_layers([[client], [broker], [worker], [store]], h_gap=1.6, v_gap=0.8)
-
-        # 4. Conecta os componentes
-        flow.connect(client, broker, label="telemetry")
-        flow.connect(broker, worker, label="ingest")
-        flow.connect(worker, store, label="batch write")
-
-        # 5. Programa a narrativa de animação
-        flow.timeline.reveal_sequence(delay=0.3)
-        flow.timeline.stream_packets(count=6, speed=0.8, duration=3.0)
-        flow.timeline.wait(1.0)
-
-        # 6. Renderiza na cena Manim
-        flow.render_manim(self)
+flow.connect(api, worker, label="evento")
+flow.connect(worker, database, label="persistência")
+flow.auto_layout(mode="horizontal")
+flow.timeline.reveal_sequence(delay_per_item=0.3)
+flow.export_html("pipeline.html")
 ```
 
-### 2. Exportando para Web Interativa (HTML/SVG)
-
-```python
-# Exportação simples para arquivo HTML estático
-html_content = flow.export_html()
-
-with open("arquitetura.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
-```
+O arquivo `pipeline.html` pode ser aberto diretamente em um navegador.
 
 ---
 
 ## Exemplos Prontos
 
-O repositório inclui exemplos completos na pasta [`examples/`](./examples/):
+Os scripts de demonstração e seus comandos de execução estão na [pasta de exemplos do GitHub](https://github.com/Oseiasdfarias/animaflow/tree/main/examples).
 
 | Exemplo | Descrição | Como Executar |
 | --- | --- | --- |
-| [`event_driven_pipeline.py`](./examples/event_driven_pipeline.py) | Pipeline de eventos em tempo real com stream contínuo de partículas e layout em camadas | `manim -qm examples/event_driven_pipeline.py EventDrivenPipelineAnimation` |
-| [`multi_agent_swarm.py`](./examples/multi_agent_swarm.py) | DAG de orquestração multi-agente com nós em cascata e nós paralelos | `manim -qm examples/multi_agent_swarm.py AgentSwarmAnimation` |
-| [`rag_pipeline_manim.py`](./examples/rag_pipeline_manim.py) | Arquitetura completa de RAG (Retrieval-Augmented Generation) | `manim -qm examples/rag_pipeline_manim.py RAGFlowAnimation` |
-| [`rag_pipeline_web.py`](./examples/rag_pipeline_web.py) | Demonstração da exportação para visualizador HTML interativo | `python examples/rag_pipeline_web.py` |
+| [`event_driven_pipeline.py`](https://github.com/Oseiasdfarias/animaflow/blob/main/examples/event_driven_pipeline.py) | Pipeline de eventos com animação contínua | `manim -qm examples/event_driven_pipeline.py EventDrivenPipelineAnimation` |
+| [`multi_agent_swarm.py`](https://github.com/Oseiasdfarias/animaflow/blob/main/examples/multi_agent_swarm.py) | Orquestração multiagente em camadas | `manim -qm examples/multi_agent_swarm.py AgentSwarmAnimation` |
+| [`rag_pipeline_manim.py`](https://github.com/Oseiasdfarias/animaflow/blob/main/examples/rag_pipeline_manim.py) | Pipeline RAG renderizado com Manim | `manim -qm examples/rag_pipeline_manim.py RAGFlowAnimation` |
+| [`rag_pipeline_web.py`](https://github.com/Oseiasdfarias/animaflow/blob/main/examples/rag_pipeline_web.py) | Exportação para HTML/SVG interativo | `python examples/rag_pipeline_web.py` |
 
----
+## Licença
 
-## Identidade Visual (Nordic Sage & Carbon)
-
-A identidade visual do **animaflow** foi concebida com princípios de design editorial nórdico e precisão industrial, evitando gradientes genéricos e priorizando contraste técnico:
-
-<p align="center">
-  <img src="./brand/png/banner-hero-1280.png" width="850" alt="Banner Oficial animaflow">
-</p>
-
-- **Símbolo**: Três nós de arquitetura dispostos em triangulação fechada por um circuito orbital contínuo de dados.
-- **Tipografia**: **IBM Plex Sans SemiBold** com curvas vetoriais extraídas via `fontTools` (sem dependência de fontes externas instaladas).
-- **Pacote Completo**: Disponível no diretório [`brand/`](./brand/) com versões em SVG puro, PNGs rasterizados via PyCairo (16px a 1600px), favicons e guia de uso em [`brand/README.md`](./brand/README.md).
-
----
-
-## Estrutura do Repositório
-
-```
-animaflow/
-├── brand/                      # Identidade visual oficial (Nordic Sage & Carbon)
-│   ├── README.md               # Especificação de design, paleta e regras de aplicação
-│   ├── scripts/                # Scripts autônomos de geração (PyCairo + fontTools)
-│   ├── svg/                    # SVGs de alta precisão com tipografia em curvas
-│   └── png/                    # PNGs rasterizados em alta resolução (16px a 1600px)
-├── docs/                       # Documentação técnica de implementação e assets
-│   ├── IMPLEMENTATION_OVERVIEW.md  # Status detalhado das implementações e roadmap
-│   └── assets/                 # Demonstrações, capturas e GIFs do pipeline
-├── src/
-│   └── animaflow/
-│       ├── core/               # Modelos (Flow, Node, Edge, Layout, Timeline)
-│       │   ├── flow.py
-│       │   ├── layout.py
-│       │   └── timeline.py
-│       └── backends/           # Renderizadores plugáveis
-│           ├── manim/          # Integração Manim CE (Mobjects vetoriais e animações)
-│           └── web/            # Gerador de Canvas SVG interativo
-├── examples/                   # Scripts de demonstração prontos para rodar
-├── tests/                      # Bateria de testes unitários e de integração
-├── pyproject.toml              # Metadados de empacotamento e dependências
-└── README.md                   # Documentação principal
-```
-
----
-
-## Roadmap e Próximos Passos
-
-Para uma visão detalhada do que já foi construído e das próximas entregas, consulte o documento [docs/IMPLEMENTATION_OVERVIEW.md](./docs/IMPLEMENTATION_OVERVIEW.md).
-
-- [x] DSL semântica de fluxos em Python
-- [x] Motor de auto-layout em camadas (DAGs) com margens dinâmicas anti-sobreposição
-- [x] Renderizador vetorial Manim com suporte a temas e subtítulos
-- [x] Animação de pacotes discretos e **stream contínuo de partículas**
-- [x] Exportador para Web Canvas SVG interativo
-- [x] Identidade visual oficial **Nordic Sage & Carbon** (SVGs, PNGs, Favicons, Banner)
-- [ ] Controles interativos no Web Canvas (Play/Pause, Zoom e Pan)
-- [ ] Suporte nativo a **Diagramas de Sequência** (`SequenceDiagram`)
-- [ ] API de estilização avançada (formas de nós customizadas, estilos de setas e gradientes)
-- [ ] CLI dedicada (`animaflow render <script> --backend manim|web`)
-- [ ] Exportação direta para formatos adicionais (JSON para Remotion, GraphViz DOT)
-
----
-
-## Autoria & Licença
-
-Desenvolvido por **[Oséias Farias](https://github.com/Oseiasdfarias)**.
-
-Distribuído sob a licença **MIT**. Consulte [`LICENSE`](./LICENSE) para mais detalhes.
+Distribuído sob a licença MIT. Consulte o [arquivo de licença](https://github.com/Oseiasdfarias/animaflow/blob/main/LICENSE).
