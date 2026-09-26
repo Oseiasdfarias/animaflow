@@ -6,15 +6,6 @@ on:
   pull_request:
   release:
     types: [published]
-  workflow_dispatch:
-    inputs:
-      target:
-        description: Publication target
-        required: true
-        default: testpypi
-        type: choice
-        options:
-          - testpypi
 
 permissions:
   contents: read
@@ -85,34 +76,12 @@ jobs:
           "$RUNNER_TEMP/animaflow-smoke/bin/python" -c "import animaflow; from importlib.metadata import version; assert version('animaflow') == animaflow.__version__"
 
       - name: Upload distributions
-        if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'release'
         uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist/
           if-no-files-found: error
-
-  publish-testpypi:
-    name: Publish to TestPyPI
-    needs: build
-    if: github.event_name == 'workflow_dispatch' && inputs.target == 'testpypi'
-    runs-on: ubuntu-latest
-    environment:
-      name: testpypi
-      url: https://test.pypi.org/project/animaflow/
-    permissions:
-      id-token: write
-    steps:
-      - name: Download distributions
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist/
-
-      - name: Publish to TestPyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          repository-url: https://test.pypi.org/legacy/
 
   attach-release-assets:
     name: Attach distributions to GitHub Release
