@@ -12,8 +12,8 @@
 
 <p align="center">
   <a href="https://oseiasdfarias.github.io/animaflow/"><img alt="Documentação Online" src="https://img.shields.io/badge/docs-online-1A2024?style=for-the-badge&logo=materialformkdocs&logoColor=9EC8B9"/></a>
-  <a href="https://github.com/Oseiasdfarias/animaflow/actions/workflows/docs.yml"><img alt="Build da documentação" src="https://img.shields.io/github/actions/workflow/status/Oseiasdfarias/animaflow/docs.yml?branch=main&style=for-the-badge&label=build%20docs&logo=githubactions&logoColor=white"/></a>
-  <a href="https://pypi.org/project/animaflow/"><img alt="PyPI version" src="https://img.shields.io/badge/pypi-animaflow-5C9E89?style=for-the-badge&logo=pypi&logoColor=white"/></a>
+  <a href="https://github.com/Oseiasdfarias/animaflow/actions/workflows/publish.yml"><img alt="Publicação PyPI" src="https://img.shields.io/github/actions/workflow/status/Oseiasdfarias/animaflow/publish.yml?branch=main&style=for-the-badge&label=publish&logo=githubactions&logoColor=white"/></a>
+  <a href="https://pypi.org/project/animaflow/"><img alt="PyPI version" src="https://img.shields.io/pypi/v/animaflow?style=for-the-badge&logo=pypi&logoColor=white"/></a>
   <a href="https://opensource.org/licenses/MIT"><img alt="License MIT" src="https://img.shields.io/badge/license-MIT-1A2024?style=for-the-badge&logoColor=white"/></a>
   <a href="https://github.com/Oseiasdfarias/animaflow"><img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10+-121619?style=for-the-badge&logo=python&logoColor=9EC8B9"/></a>
 </p>
@@ -88,17 +88,33 @@ O núcleo do **animaflow** é modular e extensível:
 ## Instalação
 
 ```bash
-# Instalação básica (Core + Web Canvas export)
+# Instalação básica (Core + exportação Web Canvas)
 pip install animaflow
 
-# Com suporte completo ao renderizador de vídeo Manim (MP4 / GIF)
-pip install "animaflow[manim]"
-
-# Instalação completa de desenvolvimento
+# Core com todos os renderizadores opcionais, incluindo Manim (MP4 / GIF)
 pip install "animaflow[all]"
+
+# Ferramentas de teste, lint, tipos e publicação
+pip install -e ".[dev]"
 ```
 
 > **Nota:** Para renderização via Manim, é necessário ter o `ffmpeg` instalado no seu sistema operacional.
+
+## Publicar uma versão
+
+O workflow [`publish.yml`](./.github/workflows/publish.yml) testa em Python 3.10–3.12 e valida o wheel e o sdist. Para publicar no PyPI, crie uma GitHub Release com a tag `vX.Y.Z`; a tag deve corresponder às versões em `pyproject.toml` e `src/animaflow/__init__.py`. Para testar, execute o workflow manualmente com o destino `testpypi`.
+
+Antes da primeira publicação, cadastre um **pending publisher** em cada índice:
+
+| Campo | PyPI | TestPyPI |
+| --- | --- | --- |
+| Project name | `animaflow` | `animaflow` |
+| Owner | `Oseiasdfarias` | `Oseiasdfarias` |
+| Repository | `animaflow` | `animaflow` |
+| Workflow filename | `publish.yml` | `publish.yml` |
+| Environment | `pypi` | `testpypi` |
+
+No PyPI, configure o pending publisher em [Publishing](https://pypi.org/manage/account/publishing/); no TestPyPI, use [Publishing](https://test.pypi.org/manage/account/publishing/). Os environments `pypi` e `testpypi` do GitHub já estão criados. O OIDC não usa tokens ou secrets do PyPI.
 
 ---
 
