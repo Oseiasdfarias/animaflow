@@ -1,109 +1,111 @@
-![animaflow](https://raw.githubusercontent.com/Oseiasdfarias/animaflow/main/brand/png/logo-horizontal-solido-800.png)
+<div align="center">
 
-<p align="center">
-  <strong>Diagramas e fluxogramas de arquitetura declarativos, animados e programáveis em Python</strong><br>
-  <sub>Modele fluxos uma vez e exporte para HTML/SVG interativo ou animações com Manim</sub>
-</p>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Oseiasdfarias/animaflow/main/docs/assets/readme/banner-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Oseiasdfarias/animaflow/main/docs/assets/readme/banner-light.svg">
+  <img alt="animaflow: animated architecture diagrams, written as code" src="https://raw.githubusercontent.com/Oseiasdfarias/animaflow/main/docs/assets/readme/banner-dark.svg" width="100%">
+</picture>
 
-<p align="center">
-  <a href="https://pypi.org/project/animaflow/"><img alt="PyPI version" src="https://img.shields.io/pypi/v/animaflow"/></a>
-  <a href="https://pypi.org/project/animaflow/"><img alt="Python versions" src="https://img.shields.io/pypi/pyversions/animaflow"/></a>
-  <a href="https://github.com/Oseiasdfarias/animaflow/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-green.svg"/></a>
-</p>
+<a href="https://pypi.org/project/animaflow/"><img alt="PyPI version" src="https://img.shields.io/pypi/v/animaflow?style=flat-square&labelColor=141416&color=d4885a&logo=pypi&logoColor=d4885a"/></a>
+<a href="https://pypi.org/project/animaflow/"><img alt="Python versions" src="https://img.shields.io/pypi/pyversions/animaflow?style=flat-square&labelColor=141416&color=d4885a&logo=python&logoColor=d4885a"/></a>
+<a href="https://oseiasdfarias.github.io/animaflow/"><img alt="Docs" src="https://img.shields.io/badge/docs-online-d4885a?style=flat-square&labelColor=141416&logo=materialformkdocs&logoColor=d4885a"/></a>
+<a href="https://github.com/Oseiasdfarias/animaflow/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-d4885a?style=flat-square&labelColor=141416"/></a>
 
----
+**English** · [Português](https://github.com/Oseiasdfarias/animaflow/blob/main/README.pt-BR.md)
 
-## Galeria & Exemplos
+</div>
+
+## Gallery
 
 <table>
   <tr>
-    <td width="33%"><img src="https://raw.githubusercontent.com/Oseiasdfarias/animaflow/main/docs/assets/event_driven_pipeline_stream.gif" alt="Event-Driven Pipeline com Continuous Stream"></td>
-    <td width="33%"><img src="https://raw.githubusercontent.com/Oseiasdfarias/animaflow/main/docs/assets/multi_agent_swarm.png" alt="Multi-Agent Swarm Orchestration"></td>
-    <td width="33%"><img src="https://raw.githubusercontent.com/Oseiasdfarias/animaflow/main/docs/assets/rag_pipeline.png" alt="RAG Retrieval Pipeline"></td>
+    <td width="33%"><img src="https://raw.githubusercontent.com/Oseiasdfarias/animaflow/main/docs/assets/event_driven_pipeline_stream.gif" alt="Event-driven pipeline with a continuous stream"></td>
+    <td width="33%"><img src="https://raw.githubusercontent.com/Oseiasdfarias/animaflow/main/docs/assets/multi_agent_swarm.png" alt="Multi-agent swarm orchestration"></td>
+    <td width="33%"><img src="https://raw.githubusercontent.com/Oseiasdfarias/animaflow/main/docs/assets/rag_pipeline.png" alt="RAG retrieval pipeline"></td>
   </tr>
   <tr>
-    <td align="center"><sub><b>Streaming Contínuo</b> — fluxo em tempo real de partículas</sub></td>
-    <td align="center"><sub><b>Multi-Agent Swarm</b> — DAG de orquestração em camadas</sub></td>
-    <td align="center"><sub><b>RAG Pipeline</b> — arquitetura de busca e LLM</sub></td>
+    <td align="center"><sub><b>Continuous stream</b>: particles flowing in real time</sub></td>
+    <td align="center"><sub><b>Multi-agent swarm</b>: layered orchestration DAG</sub></td>
+    <td align="center"><sub><b>RAG pipeline</b>: retrieval and LLM architecture</sub></td>
   </tr>
 </table>
 
----
+## Why animaflow?
 
-## Por que o animaflow?
+Architecture diagrams for **LinkedIn and X posts**, **technical videos** and **talks** usually force a bad choice:
 
-Criar diagramas de arquitetura de software para **redes profissionais (LinkedIn, X/Twitter)**, **vídeos técnicos (YouTube, Reels)** e **apresentações corporativas** geralmente exige:
-- Escrever centenas de linhas manuais de geometria, coordenadas absolutas e updaters no Manim ou After Effects, **ou**
-- Usar geradores estáticos (Graphviz, PlantUML, Diagrams) sem qualquer suporte a movimento, ritmo narrativo ou pulso de dados.
+- write hundreds of lines of geometry, absolute coordinates and updaters in Manim or After Effects, **or**
+- use static generators (Graphviz, PlantUML, Diagrams) with no motion, no pacing and no data moving through the system.
 
-O **animaflow** resolve isso separando a **definição semântica do fluxo** dos **motores de renderização**:
-1. **Declare Nós e Conexões**: especifique nós, serviços, banco de dados, labels e metadados via DSL simples em Python.
-2. **Auto-Layout Inteligente**: organize automaticamente nós em camadas (DAGs), colunas ou sequências horizontais/verticais com alinhamento e margens dinâmicas anti-sobreposição.
-3. **Timeline Narrativa**: anime pacotes individuais, streams contínuos de partículas, transições de estado e realces de nós de forma declarativa.
-4. **Múltiplos Backends**: exporte diretamente para **Manim CE** (vídeos MP4 e GIFs em alta definição) e **HTML/Web Canvas interativo**.
+**animaflow** separates **what the flow is** from **how it is rendered**:
 
----
+1. **Declare nodes and connections** in a small Python DSL: services, databases, labels and metadata.
+2. **Let the layout engine arrange them** in rows, columns or DAG layers, with spacing that avoids overlaps.
+3. **Script the story on a timeline**: reveal nodes, send packets, stream particles, highlight a step.
+4. **Render to several backends**: **Manim CE** (MP4 and GIF) or a self-contained **interactive HTML/SVG** page.
 
-## Como funciona a arquitetura
+## How it works
 
-O núcleo do **animaflow** é modular e extensível:
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Oseiasdfarias/animaflow/main/docs/assets/readme/pipeline-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Oseiasdfarias/animaflow/main/docs/assets/readme/pipeline-light.svg">
+  <img alt="animaflow architecture: declare, arrange and animate, render" src="https://raw.githubusercontent.com/Oseiasdfarias/animaflow/main/docs/assets/readme/pipeline-dark.svg" width="100%">
+</picture>
 
-| Módulo / Subsistema | O que faz | Tecnologia / Detalhes |
+| Module | What it does | Built with |
 | --- | --- | --- |
-| **Flow Core** (`core.flow`) | Armazena a topologia do grafo, metadados dos nós, conectores e parâmetros visuais | Python Puro / Dataclasses |
-| **Layout Engine** (`core.layout`) | Algoritmos de arranjo automático (horizontal, vertical, empilhamento em camadas DAG) calculando larguras mínimas e espaçamento | Algoritmos de layout de grafos |
-| **Timeline Engine** (`core.timeline`) | Orquestra as ações temporais: sequências de aparição (`reveal`), envio de pacotes (`send_packet`), streams contínuos (`stream_packets`), realces (`highlight_node`) e esperas (`wait`) | Motor declarativo de eventos |
-| **Manim Backend** (`backends.manim`) | Converte nós e conexões em Mobjects vetoriais modernos com tipografia refinada, sombras sutis, badges de subtítulo e renderiza a cena | Manim Community Edition (CE) |
-| **Web Canvas Backend** (`backends.web`) | Gera código HTML/SVG independente e interativo com simulação física de partículas em JavaScript puro | SVG nativo + ES6 Vanilla JS |
+| **Flow core** (`core.flow`) | Graph topology, node metadata, connectors and visual parameters | Pure Python, dataclasses |
+| **Layout engine** (`core.layout`) | Automatic arrangement (horizontal, vertical, layered DAG) with minimum widths and spacing | Graph layout algorithms |
+| **Timeline engine** (`core.timeline`) | Time-based actions: `reveal`, `send_packet`, `stream_packets`, `highlight_node`, `wait` | Declarative event engine |
+| **Manim backend** (`backends.manim`) | Turns nodes and edges into vector Mobjects with clean typography and renders the scene | Manim Community Edition |
+| **Web backend** (`backends.web`) | Generates standalone interactive HTML/SVG with a particle simulation in plain JavaScript | Native SVG + ES6 |
 
----
-
-## Instalação
+## Installation
 
 ```bash
 pip install animaflow
 ```
 
-Para renderizar animações com Manim:
+To render animations with Manim:
 
 ```bash
 pip install "animaflow[manim]"
 ```
 
-A renderização de vídeo com Manim também requer FFmpeg instalado no sistema.
+Video rendering with Manim also needs FFmpeg installed on the system.
 
-## Exemplo rápido
+## Quick example
 
 ```python
 import animaflow as af
 
-flow = af.Flow(title="Pipeline de pedidos")
-api = flow.add_node("API", subtitle="Recebe pedidos")
-worker = flow.add_node("Worker", subtitle="Processa eventos")
-database = flow.add_node("Database", subtitle="Armazena resultados")
+flow = af.Flow(title="Order pipeline")
+api = flow.add_node("API", subtitle="Receives orders")
+worker = flow.add_node("Worker", subtitle="Processes events")
+database = flow.add_node("Database", subtitle="Stores results")
 
-flow.connect(api, worker, label="evento")
-flow.connect(worker, database, label="persistência")
+flow.connect(api, worker, label="event")
+flow.connect(worker, database, label="persist")
 flow.auto_layout(mode="horizontal")
 flow.timeline.reveal_sequence(delay_per_item=0.3)
 flow.export_html("pipeline.html")
 ```
 
-O arquivo `pipeline.html` pode ser aberto diretamente em um navegador.
+Open `pipeline.html` in any browser.
 
----
+## Ready-made examples
 
-## Exemplos Prontos
+All demo scripts live in the [examples folder](https://github.com/Oseiasdfarias/animaflow/tree/main/examples).
 
-Os scripts de demonstração e seus comandos de execução estão na [pasta de exemplos do GitHub](https://github.com/Oseiasdfarias/animaflow/tree/main/examples).
-
-| Exemplo | Descrição | Como Executar |
+| Example | Description | How to run |
 | --- | --- | --- |
-| [`event_driven_pipeline.py`](https://github.com/Oseiasdfarias/animaflow/blob/main/examples/event_driven_pipeline.py) | Pipeline de eventos com animação contínua | `manim -qm examples/event_driven_pipeline.py EventDrivenPipelineAnimation` |
-| [`multi_agent_swarm.py`](https://github.com/Oseiasdfarias/animaflow/blob/main/examples/multi_agent_swarm.py) | Orquestração multiagente em camadas | `manim -qm examples/multi_agent_swarm.py AgentSwarmAnimation` |
-| [`rag_pipeline_manim.py`](https://github.com/Oseiasdfarias/animaflow/blob/main/examples/rag_pipeline_manim.py) | Pipeline RAG renderizado com Manim | `manim -qm examples/rag_pipeline_manim.py RAGFlowAnimation` |
-| [`rag_pipeline_web.py`](https://github.com/Oseiasdfarias/animaflow/blob/main/examples/rag_pipeline_web.py) | Exportação para HTML/SVG interativo | `python examples/rag_pipeline_web.py` |
+| [`event_driven_pipeline.py`](https://github.com/Oseiasdfarias/animaflow/blob/main/examples/event_driven_pipeline.py) | Event pipeline with a continuous animation | `manim -qm examples/event_driven_pipeline.py EventDrivenPipelineAnimation` |
+| [`multi_agent_swarm.py`](https://github.com/Oseiasdfarias/animaflow/blob/main/examples/multi_agent_swarm.py) | Layered multi-agent orchestration | `manim -qm examples/multi_agent_swarm.py AgentSwarmAnimation` |
+| [`rag_pipeline_manim.py`](https://github.com/Oseiasdfarias/animaflow/blob/main/examples/rag_pipeline_manim.py) | RAG pipeline rendered with Manim | `manim -qm examples/rag_pipeline_manim.py RAGFlowAnimation` |
+| [`rag_pipeline_web.py`](https://github.com/Oseiasdfarias/animaflow/blob/main/examples/rag_pipeline_web.py) | Export to interactive HTML/SVG | `python examples/rag_pipeline_web.py` |
 
-## Licença
+## License
 
-Distribuído sob a licença MIT. Consulte o [arquivo de licença](https://github.com/Oseiasdfarias/animaflow/blob/main/LICENSE).
+MIT. See the [license file](https://github.com/Oseiasdfarias/animaflow/blob/main/LICENSE).
+
+Built by **[Oséias Farias](https://github.com/Oseiasdfarias)**.
